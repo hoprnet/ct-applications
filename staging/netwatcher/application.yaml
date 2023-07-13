@@ -17,6 +17,10 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "6353bc2"
             replicaCount: 1
+            args:
+              - python
+              - -m
+              - netwatcher
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
