@@ -21,6 +21,16 @@ spec:
               - python
               - -m
               - aggregator
+            env:
+              HOST: 0.0.0.0/0
+              PORT: 8080
+            envFrom:
+              - secretRef:
+                  name: aggregator
+            service:
+              type: ClusterIP
+              ports:
+                http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
