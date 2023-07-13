@@ -21,6 +21,7 @@ spec:
               - python
               - -m
               - netwatcher
+              - --port=1234
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
