@@ -18,9 +18,7 @@ spec:
               tag: "6353bc2"
             replicaCount: 1
             args:
-              - python
-              - -m
-              - aggregator
+              - env
             env:
               HOST: 0.0.0.0/0
               PORT: 8080
