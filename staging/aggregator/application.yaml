@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: netwatcher
+  name: aggregator
   namespace: staging
 spec:
   project: staging
@@ -20,9 +20,7 @@ spec:
             args:
               - python
               - -m
-              - netwatcher
-              - --port=1234
-              - --apihost=127.0.0.1
+              - aggregator
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
