@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggregator_trigger
+  name: aggtrigger
   namespace: staging
 spec:
   project: staging
