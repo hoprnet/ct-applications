@@ -15,15 +15,15 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "6353bc2"
+              tag: "aeb504b"
             replicaCount: 1
             args:
               - python
               - -m
               - aggregator
             env:
-              HOST: 0.0.0.0/0
-              PORT: 8080
+              API_HOST: 0.0.0.0/0
+              API_PORT: 8080
             envFrom:
               - secretRef:
                   name: aggregator
