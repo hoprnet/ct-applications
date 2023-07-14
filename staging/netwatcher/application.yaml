@@ -22,11 +22,11 @@ spec:
               - -m
               - netwatcher
             env:
-              AGG_POST:"staging-aggregator.staging:8080/aggregator/list"
-              API_HOST:"<random_host>"
-              API_KEY:"<random_key>"
-              LAT_COUNT:10
-              MOCK_MODE:True
+              AGG_POST: staging-aggregator.staging:8080/aggregator/list
+              API_HOST: <random_host>
+              API_KEY: <random_key>
+              LAT_COUNT: 10
+              MOCK_MODE: True
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
