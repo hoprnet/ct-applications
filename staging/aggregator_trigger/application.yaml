@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: netwatcher
+  name: aggregator_trigger
   namespace: staging
 spec:
   project: staging
@@ -20,13 +20,9 @@ spec:
             args:
               - python
               - -m
-              - netwatcher
+              - aggregator_trigger
             env:
-              AGG_POST: http://staging-aggregator.staging:8080/aggregator/list
-              API_HOST: <random_host>
-              API_KEY: <random_key>
-              LAT_COUNT: 10
-              MOCK_MODE: True
+              POST_TO_DB_ENDPOINT: http://staging-aggregator.staging:8080/aggregator/to_db
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
