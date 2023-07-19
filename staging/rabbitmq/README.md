@@ -5,7 +5,7 @@ export ENVIRONMENT_NAME=staging
 export RABBITMQ_CTAPP_USERNAME=ctapp-${ENVIRONMENT_NAME}
 export RABBITMQ_CTAPP_PASSWORD=$(pwgen -s 64 1)
 export RABBITMQ_CTAPP_URL="amqp://${RABBITMQ_CTAPP_USERNAME}:${RABBITMQ_CTAPP_PASSWORD}@rabbitmq-ha-cluster.rabbitmq.svc/${RABBITMQ_CTAPP_USERNAME}"
-kubectl create secret generic ctapp-rabbitmq-${ENVIRONMENT_NAME} --namespace ${ENVIRONMENT_NAME} --dry-run=client --from-literal=CELERY_BROKER_URL=${RABBITMQ_CTAPP_URL} --from-literal=username=${RABBITMQ_CTAPP_USERNAME} --from-literal=password=${RABBITMQ_CTAPP_PASSWORD} -o yaml | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets --format yaml > /tmp/sealed-secret-rabbitmq.yaml
+kubectl create secret generic ctapp-rabbitmq-${ENVIRONMENT_NAME} --namespace rabbitmq --dry-run=client --from-literal=CELERY_BROKER_URL=${RABBITMQ_CTAPP_URL} --from-literal=username=${RABBITMQ_CTAPP_USERNAME} --from-literal=password=${RABBITMQ_CTAPP_PASSWORD} -o yaml | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets --format yaml > /tmp/sealed-secret-rabbitmq.yaml
 export RABBITMQ_CTAPP_USERNAME_ENCRYPTED=$(yq ".spec.encryptedData.username" /tmp/sealed-secret-rabbitmq.yaml)
 export RABBITMQ_CTAPP_PASSWORD_ENCRYPTED=$(yq ".spec.encryptedData.password" /tmp/sealed-secret-rabbitmq.yaml)
 export RABBITMQ_CTAPP_URL_ENCRYPTED=$(yq ".spec.encryptedData.CELERY_BROKER_URL" /tmp/sealed-secret-rabbitmq.yaml)

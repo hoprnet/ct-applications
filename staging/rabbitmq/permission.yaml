@@ -1,0 +1,16 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Permission
+metadata:
+  name: ctapp-staging
+  namespace: rabbitmq
+spec:
+  permissions:
+    configure: .*
+    read: .*
+    write: .*
+  userReference:
+    name: ctapp-staging
+  vhost: ctapp-staging
+  rabbitmqClusterReference:
+    name: rabbitmq-ha-cluster
