@@ -1,0 +1,11 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: ctapp-staging
+  namespace: rabbitmq
+spec:
+  importCredentialsSecret:
+    name: ctapp-rabbitmq-staging
+  rabbitmqClusterReference:
+    name: rabbitmq-ha-cluster
