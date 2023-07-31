@@ -32,6 +32,9 @@ spec:
               type: ClusterIP
               ports:
                 http: 8080
+            serviceAccount:
+              create: false
+              name: "default"
   destination:
     server: https://kubernetes.default.svc
     namespace: production
