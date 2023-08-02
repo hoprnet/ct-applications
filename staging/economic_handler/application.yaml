@@ -17,7 +17,10 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "6bfc6ae"
             replicaCount: 1
-            args: [python, -m, economic_handler]
+            args: 
+              - python
+              - -m
+              - economic_handler
             env:
               API_HOST: <random_host>
               API_KEY: <random_key>

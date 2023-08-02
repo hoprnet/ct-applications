@@ -17,7 +17,10 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "d06f325"
             replicaCount: 1
-            args: [python, -m, netwatcher]
+            args:
+              - python
+              - -m
+              - netwatcher
             env:
               AGG_POST: http://staging-aggregator.staging:8080/aggregator/list
               API_HOST: <random_host>
