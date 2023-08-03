@@ -27,6 +27,10 @@ spec:
               RPCH_NODES: <random_rpch_endpoint>
               SUBGRAPH_URL: <random_subgraph_url>
               SC_ADDRESS: <random_sc_address>
+              DB_NAME: postgres
+            envFrom:
+              - secretRef:
+                  name: economichandler
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
