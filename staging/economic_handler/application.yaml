@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: economic-handler
+  name: economichandler
   namespace: staging
 spec:
   project: staging
