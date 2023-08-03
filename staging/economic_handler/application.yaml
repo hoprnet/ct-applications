@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: economic_handler
+  name: economic-handler
   namespace: staging
 spec:
   project: staging
@@ -22,11 +22,11 @@ spec:
               - -m
               - economic_handler
             env:
-              API_HOST: <random_host>
-              API_KEY: <random_key>
-              RPCH_NODES: <random_endpoint>
-              SUBGRAPH_URL: <random_endpoint>
-              SC_ADDRESS: <random_endpoint>
+              API_HOST: ""
+              API_KEY: ""
+              RPCH_NODES: ""
+              SUBGRAPH_URL: ""
+              SC_ADDRESS: ""
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
