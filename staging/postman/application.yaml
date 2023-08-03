@@ -15,7 +15,7 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "d06f325"
+              tag: "0195a42"
             replicaCount: 1
             args: [export, "NODE_ADDRESS=$(python -m postman 2>&1)", 
                   celery, -A, postman.postman_tasks.app, worker, --concurrency=1, -n, worker@%h, -l, info, _E, -Q, "$NODE_ADDRESS"]
