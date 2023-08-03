@@ -19,7 +19,7 @@ spec:
             replicaCount: 1
             args:
               - python
-              - -m
+              - '-m'
               - netwatcher
             env:
               AGG_POST: http://staging-aggregator.staging:8080/aggregator/list

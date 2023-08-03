@@ -19,7 +19,7 @@ spec:
             replicaCount: 1
             args: 
               - python
-              - -m
+              - '-m'
               - economic_handler
             env:
               API_HOST: ""
