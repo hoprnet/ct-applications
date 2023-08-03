@@ -22,11 +22,11 @@ spec:
               - '-m'
               - economic_handler
             env:
-              API_HOST: ""
-              API_KEY: ""
-              RPCH_NODES: ""
-              SUBGRAPH_URL: ""
-              SC_ADDRESS: ""
+              API_HOST: <random_host>
+              API_KEY: <random_key>
+              RPCH_NODES: <random_rpch_endpoint>
+              SUBGRAPH_URL: <random_subgraph_url>
+              SC_ADDRESS: <random_sc_address>
   destination:
     server: https://kubernetes.default.svc
     namespace: staging

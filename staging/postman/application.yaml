@@ -24,9 +24,7 @@ spec:
               TASK_NAME: send_1_hop_message
               API_HOST: <random_host>
               API_KEY: <random_key>
-            envFrom:
-              - secretRef:
-                  name: postman
+
             service:
               type: ClusterIP
               ports:
