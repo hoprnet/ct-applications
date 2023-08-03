@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: economichandler
+  name: postman
   namespace: staging
 spec:
   project: staging
@@ -15,18 +15,22 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "730ad61"
+              tag: "d06f325"
             replicaCount: 1
-            args: 
-              - python
-              - '-m'
-              - economic_handler
+            args: [export, "NODE_ADDRESS=$(python -m postman 2>&1)", 
+                  celery, -A, postman.postman_tasks.app, worker, --concurrency=1, -n, worker@%h, -l, info, _E, -Q, "$NODE_ADDRESS"]
             env:
-              API_HOST: ""
-              API_KEY: ""
-              RPCH_NODES: ""
-              SUBGRAPH_URL: ""
-              SC_ADDRESS: ""
+              PROJECT_NAME: ct-app
+              TASK_NAME: send_1_hop_message
+              API_HOST: <random_host>
+              API_KEY: <random_key>
+            envFrom:
+              - secretRef:
+                  name: postman
+            service:
+              type: ClusterIP
+              ports:
+                http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
