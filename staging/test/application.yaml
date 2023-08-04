@@ -20,6 +20,8 @@ spec:
             args: ["infinity"]
             podSecurityContext:
               enabled: false
+            containerSecurityContext:
+              enabled: false
             serviceAccount:
               create: false
               name: "staging-economichandler"
