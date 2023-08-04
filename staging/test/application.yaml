@@ -14,8 +14,10 @@ spec:
         - name: HELM_VALUES
           value: |
             image:
-              repository: nginx
+              repository: ubuntu
               tag: "latest"
+            command: [ "/bin/bash", "-c", "--" ]
+            args: [ "while true; do sleep 30; done;" ]
             serviceAccount:
               create: false
               name: "staging-economichandler"
