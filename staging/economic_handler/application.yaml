@@ -32,6 +32,9 @@ spec:
             envFrom:
               - secretRef:
                   name: economichandler
+            serviceAccount:
+              annotations:
+                iam.gke.io/gcp-service-account: ARGOCD_ENV_CLUSTER_NAME-ct@ARGOCD_ENV_GOOGLE_PROJECT.iam.gserviceaccount.com
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
