@@ -16,7 +16,7 @@ spec:
             image:
               repository: busybox
               tag: "latest"
-            command: [ "/bin/bash", "-c", "--" ]
+            command: [ "/bin/sh", "-c", "--" ]
             args: [ "while true; do sleep 30; done;" ]
             serviceAccount:
               create: false
