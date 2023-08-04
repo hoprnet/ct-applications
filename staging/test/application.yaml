@@ -14,10 +14,8 @@ spec:
         - name: HELM_VALUES
           value: |
             image:
-              repository: busybox
+              repository: nginx
               tag: "latest"
-            command: [ "/bin/sh", "-c", "--" ]
-            args: [ "while true; do sleep 30; done;" ]
             serviceAccount:
               create: false
               name: "staging-economichandler"
