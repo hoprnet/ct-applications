@@ -27,6 +27,9 @@ spec:
               RPCH_NODES: ""
               SUBGRAPH_URL: ""
               SC_ADDRESS: ""
+            serviceAccount:
+              create: false
+              name: "default"
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
