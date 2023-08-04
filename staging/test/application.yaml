@@ -14,10 +14,12 @@ spec:
         - name: HELM_VALUES
           value: |
             image:
-              repository: sitilge/go-devops
+              repository: ubuntu
               tag: "latest"
             command: ["sleep"]
             args: ["infinity"]
+            podSecurityContext:
+              enabled: false
             serviceAccount:
               create: false
               name: "staging-economichandler"
