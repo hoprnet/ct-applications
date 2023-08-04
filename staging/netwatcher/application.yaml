@@ -23,6 +23,7 @@ spec:
               - netwatcher
             env:
               AGG_POST: http://staging-aggregator.staging:8080/aggregator/list
+              AGG_BALANCE: http://staging-aggregator.staging:8080/aggregator/balances
               API_HOST: <random_host>
               API_KEY: <random_key>
               LAT_COUNT: 10

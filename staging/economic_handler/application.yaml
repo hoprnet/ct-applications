@@ -15,18 +15,23 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "0195a42"
+              tag: "8d23178"
             replicaCount: 1
             args: 
               - python
               - '-m'
               - economic_handler
             env:
-              API_HOST: ""
-              API_KEY: ""
-              RPCH_NODES: ""
-              SUBGRAPH_URL: ""
-              SC_ADDRESS: ""
+              API_HOST: <random_host>
+              API_KEY: <random_key>
+              RPCH_NODES: <random_rpch_endpoint>
+              SUBGRAPH_URL: <random_subgraph_url>
+              SC_ADDRESS: <random_sc_address>
+              MOCK_MODE: True
+              DB_NAME: postgres
+            envFrom:
+              - secretRef:
+                  name: economichandler
             serviceAccount:
               create: false
               name: "default"
