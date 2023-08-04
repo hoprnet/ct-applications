@@ -23,6 +23,9 @@ spec:
               - aggregator_trigger
             env:
               POST_TO_DB_ENDPOINT: http://staging-aggregator.staging:8080/aggregator/to_db
+            serviceAccount:
+              create: false
+              name: "default"
   destination:
     server: https://kubernetes.default.svc
     namespace: staging

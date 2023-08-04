@@ -32,6 +32,9 @@ spec:
             envFrom:
               - secretRef:
                   name: economichandler
+            serviceAccount:
+              create: false
+              name: "default"
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
