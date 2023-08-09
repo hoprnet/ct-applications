@@ -12,7 +12,7 @@ spec:
             description: >-
               Triggers when average latency is too high
             summary: Latencies are very high.
-          expr: avg(peer_latency) > 20
+          expr: avg(peer_latency) > 100
           for: 10m
           labels:
             severity: warning
