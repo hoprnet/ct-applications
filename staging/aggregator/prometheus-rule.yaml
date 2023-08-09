@@ -10,7 +10,7 @@ spec:
         - alert: LatencyMonitorHighLatency
           annotations:
             description: >-
-              Test query on latency. Triggers when average latency is too high
+              Triggers when average latency is too high
             summary: Latencies are very high.
           expr: avg(peer_latency) > 60
           for: 10m
