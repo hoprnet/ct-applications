@@ -17,14 +17,14 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "0195a42"
             replicaCount: 1
-            args: ["export NODE_ADDRESS=$(python -m postman 2>&1)",
-                  "echo $NODE_ADDRESS",
-                  "celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info _E -Q $NODE_ADDRESS"]
+            args: ["celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info _E -Q $NODE_ADDRESS"]
             env:
               PROJECT_NAME: ct-app
               TASK_NAME: send_1_hop_message
               API_HOST: <random_host>
               API_KEY: <random_key>
+              NODE_ADDRESS: $(python -m postman 2>&1)
+
 
               CELERY_BROKER_URL: "amqp://$RABBITMQ_USERNAME:$RABBITMQ_PASSWORD@$RABBITMQ_HOST/$RABBITMQ_VIRTUALHOST"
             envFrom:
