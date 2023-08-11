@@ -22,6 +22,7 @@ spec:
             - -c
             - |
               export NODE_ADDRESS=$(python -m postman 2>&1)
+              echo $NODE_ADDRESS
               celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $NODE_ADDRESS
 
             env:
