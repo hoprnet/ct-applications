@@ -21,10 +21,10 @@ spec:
               - /bin/sh
               - -c
               - |
-                python -m postman 2>temp.txt
-                node_address=$(tail -n 1 temp.txt)
-                rm temp.txt
+                node_address=$(python -m postman 2>&1 | tail -n 1)
+                echo $node_address
                 celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
+
 
             env:
               PROJECT_NAME: ct-app
