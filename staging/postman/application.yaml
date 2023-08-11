@@ -21,10 +21,11 @@ spec:
             - /bin/sh
             - -c
             - |
-              export NODE_ADDRESS=$(python -m postman 2>&1)
-              echo $NODE_ADDRESS
-              celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $NODE_ADDRESS
-
+              python -m postman 2>temp.txt
+              node_address=$(tail -n 1 temp.txt)
+              rm temp.txt
+              celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
+              
             env:
               PROJECT_NAME: ct-app
               TASK_NAME: send_1_hop_message
