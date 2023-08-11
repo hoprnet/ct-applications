@@ -17,15 +17,15 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "0195a42"
             replicaCount: 1
-            commands:
-            - /bin/sh
-            - -c
-            - |
-              python -m postman 2>temp.txt
-              node_address=$(tail -n 1 temp.txt)
-              rm temp.txt
-              celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
-              
+            args:
+              - /bin/sh
+              - -c
+              - |
+                python -m postman 2>temp.txt
+                node_address=$(tail -n 1 temp.txt)
+                rm temp.txt
+                celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
+
             env:
               PROJECT_NAME: ct-app
               TASK_NAME: send_1_hop_message
