@@ -21,7 +21,7 @@ spec:
               - /bin/sh
               - -c
               - |
-                celery -A postman_feedback.postman_feedback_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q feeback_queue
+                celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feeback_queue
 
             env:
               PROJECT_NAME: ct-app
