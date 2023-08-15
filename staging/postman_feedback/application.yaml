@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postman_feedback
+  namespace: staging
+spec:
+  project: staging
+  source:
+    repoURL: https://dysnix.github.io/charts
+    targetRevision: 0.99.16
+    chart: app
+    plugin:
+      env:
+        - name: HELM_VALUES
+          value: |
+            image:
+              repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+              tag: "0195a42"
+            replicaCount: 0
+            args:
+              - /bin/sh
+              - -c
+              - |
+                celery -A postman_feedback.postman_feedback_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q feeback_queue
+
+            env:
+              PROJECT_NAME: ct-app
+              CELERY_BROKER_URL: "amqp://$RABBITMQ_USERNAME:$RABBITMQ_PASSWORD@$RABBITMQ_HOST/$RABBITMQ_VIRTUALHOST"
+
+            envFrom:
+              - secretRef:
+                  name: postman_feedback
+            service:
+              type: ClusterIP
+              ports:
+                http: 8080
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
