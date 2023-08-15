@@ -25,7 +25,6 @@ spec:
 
             env:
               PROJECT_NAME: ct-app
-              CELERY_BROKER_URL: "amqp://$RABBITMQ_USERNAME:$RABBITMQ_PASSWORD@$RABBITMQ_HOST/$RABBITMQ_VIRTUALHOST"
 
             envFrom:
               - secretRef:
