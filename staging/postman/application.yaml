@@ -15,7 +15,7 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "0195a42"
+              tag: "3dde64c"
             replicaCount: 0
             args:
               - /bin/sh
@@ -31,7 +31,6 @@ spec:
               TASK_NAME: send_1_hop_message
               API_HOST: <random_host>
               API_KEY: <random_key>
-              CELERY_BROKER_URL: "amqp://$RABBITMQ_USERNAME:$RABBITMQ_PASSWORD@$RABBITMQ_HOST/$RABBITMQ_VIRTUALHOST"
 
             envFrom:
               - secretRef:
