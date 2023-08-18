@@ -24,10 +24,21 @@ spec:
             env:
               API_HOST: 0.0.0.0
               API_PORT: 8080
-              DB_NAME: postgres
+              PGSSLCERT: "/etc/postres/certs/tls.crt"
+              PGSSLKEY: "/etc/postres/certs/tls.key"
+              PGSSLROOTCERT: "/etc/postres/certs/ca.crt"
+              PGSSLMODE: verify-ca
             envFrom:
               - secretRef:
-                  name: aggregator
+                  name: postgres-credentials
+            extraVolumeMounts:
+              - name: postgres-certs
+                readOnly: true
+                mountPath: "/etc/postres/certs"
+            extraVolumes:
+              - name: postgres-certs
+                secret:
+                  secretName: postgres-certs
             service:
               type: ClusterIP
               ports:
