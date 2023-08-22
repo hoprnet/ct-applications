@@ -15,7 +15,7 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "65876cb"
+              tag: "2a8d28b"
             replicaCount: 0
             args:
               - python
@@ -24,10 +24,21 @@ spec:
             env:
               API_HOST: 0.0.0.0
               API_PORT: 8080
-              DB_NAME: postgres
+              PGSSLCERT: "/etc/postgres/certs/tls.crt"
+              PGSSLKEY: "/etc/postgres/certs/tls.key"
+              PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
+              PGSSLMODE: verify-ca
             envFrom:
               - secretRef:
-                  name: aggregator
+                  name: postgres-credentials
+            extraVolumeMounts:
+              - name: postgres-certs
+                readOnly: true
+                mountPath: "/etc/postgres/certs"
+            extraVolumes:
+              - name: postgres-certs
+                secret:
+                  secretName: postgres-certs
             service:
               type: ClusterIP
               ports:
