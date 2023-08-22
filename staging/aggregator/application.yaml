@@ -24,8 +24,8 @@ spec:
             env:
               API_HOST: 0.0.0.0
               API_PORT: 8080
-              PGSSLCERT: "/etc/postres/certs/tls.crt"
-              PGSSLKEY: "/etc/postres/certs/tls.key"
+              PGSSLCERT: "/etc/postgres/certs/tls.crt"
+              PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
             envFrom:

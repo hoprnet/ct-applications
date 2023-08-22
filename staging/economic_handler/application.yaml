@@ -28,10 +28,21 @@ spec:
               SUBGRAPH_URL: <random_subgraph_url>
               SC_ADDRESS: <random_sc_address>
               MOCK_MODE: True
-              DB_NAME: postgres
+              PGSSLCERT: "/etc/postgres/certs/tls.crt"
+              PGSSLKEY: "/etc/postgres/certs/tls.key"
+              PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
+              PGSSLMODE: verify-ca
             envFrom:
               - secretRef:
-                  name: economichandler
+                  name: postgres-credentials
+            extraVolumeMounts:
+              - name: postgres-certs
+                readOnly: true
+                mountPath: "/etc/postgres/certs"
+            extraVolumes:
+              - name: postgres-certs
+                secret:
+                  secretName: postgres-certs
             serviceAccount:
               annotations:
                 iam.gke.io/gcp-service-account: ARGOCD_ENV_CLUSTER_NAME-ct@ARGOCD_ENV_GOOGLE_PROJECT.iam.gserviceaccount.com

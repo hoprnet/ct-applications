@@ -3,8 +3,6 @@
 ````
 export ENVIRONMENT_NAME=staging
 
-
-
 kubectl create secret generic postgres-certs --namespace ${ENVIRONMENT_NAME} --dry-run=client --type=kubernetes.io/tls --from-file=tls.crt=postgres-staging-client-cert.pem --from-file=tls.key=postgres-staging-client-key.pem --from-file=ca.crt=postgres-staging-ca.pem -o yaml | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets --format yaml > sealed-secret-postgres-certs.yaml
 
 export PGHOST=$(gcloud sql instances describe staging --format=json | jq -r '.ipAddresses[0].ipAddress')
