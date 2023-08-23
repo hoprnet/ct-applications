@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netwatcher
+  namespace: production
+spec:
+  project: production
+  source:
+    repoURL: https://dysnix.github.io/charts
+    targetRevision: 0.99.16
+    chart: app
+    plugin:
+      env:
+        - name: HELM_VALUES
+          value: |
+            image:
+              repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+              tag: "cfe2d99"
+            replicaCount: 0
+            args:
+              - python
+              - '-m'
+              - netwatcher
+            env:
+              AGG_POST: http://production-aggregator.production:8080/aggregator/peers
+              AGG_BALANCE: http://production-aggregator.production:8080/aggregator/balances
+              API_HOST: ""
+              API_KEY: ""
+              LAT_COUNT: 10
+              MOCK_MODE: True
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

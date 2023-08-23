@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: latency-monitor
+  namespace: production
+spec:
+  groups:
+    - name: latency-monitor
+      rules:
+        - alert: LatencyMonitorHighLatency
+          annotations:
+            description: >-
+              Triggers when average latency is too high
+            summary: Latencies are very high.
+          expr: avg(peer_latency) > 100
+          for: 10m
+          labels:
+            severity: warning

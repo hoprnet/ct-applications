@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggregator
+  name: postman
   namespace: production
 spec:
   project: production
@@ -15,30 +15,23 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "2a8d28b"
+              tag: "e393434"
             replicaCount: 0
             args:
-              - python
-              - '-m'
-              - aggregator
+              - /bin/sh
+              - -c
+              - |
+                node_address=$(python -m postman 2>&1 | tail -n 1)
+                echo $node_address
+                celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
             env:
-              API_HOST: 0.0.0.0
-              API_PORT: 8080
-              PGSSLCERT: "/etc/postgres/certs/tls.crt"
-              PGSSLKEY: "/etc/postgres/certs/tls.key"
-              PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
-              PGSSLMODE: verify-ca
+              PROJECT_NAME: ct-app
+              TASK_NAME: send_1_hop_message
+              API_HOST: ""
+              API_KEY: ""
             envFrom:
               - secretRef:
-                  name: postgres-credentials
-            extraVolumeMounts:
-              - name: postgres-certs
-                readOnly: true
-                mountPath: "/etc/postgres/certs"
-            extraVolumes:
-              - name: postgres-certs
-                secret:
-                  secretName: postgres-certs
+                  name: ctapp-rabbitmq-production
             service:
               type: ClusterIP
               ports:

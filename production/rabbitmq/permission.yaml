@@ -1,0 +1,16 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Permission
+metadata:
+  name: ctapp-production
+  namespace: rabbitmq
+spec:
+  permissions:
+    configure: .*
+    read: .*
+    write: .*
+  userReference:
+    name: ctapp-production
+  vhost: ctapp-production
+  rabbitmqClusterReference:
+    name: rabbitmq-ha-cluster

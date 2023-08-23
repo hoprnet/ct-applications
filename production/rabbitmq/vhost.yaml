@@ -1,0 +1,10 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Vhost
+metadata:
+  name: ctapp-production
+  namespace: rabbitmq
+spec:
+  name: ctapp-production
+  rabbitmqClusterReference:
+    name: rabbitmq-ha-cluster

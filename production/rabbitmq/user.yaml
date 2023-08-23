@@ -1,0 +1,11 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: ctapp-production
+  namespace: rabbitmq
+spec:
+  importCredentialsSecret:
+    name: ctapp-rabbitmq-production
+  rabbitmqClusterReference:
+    name: rabbitmq-ha-cluster
