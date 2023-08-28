@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggregator
+  name: postmanfeedback
   namespace: production
 spec:
   project: production
@@ -15,22 +15,19 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "2a8d28b"
+              tag: "e393434"
             replicaCount: 0
             args:
-              - python
-              - '-m'
-              - aggregator
+              - /bin/sh
+              - -c
+              - |
+                celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feeback_queue
             env:
-              API_HOST: 0.0.0.0
-              API_PORT: 8080
+              PROJECT_NAME: ct-app
               PGSSLCERT: "/etc/postgres/certs/tls.crt"
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
-            envFrom:
-              - secretRef:
-                  name: postgres-credentials
             extraVolumeMounts:
               - name: postgres-certs
                 readOnly: true
@@ -39,6 +36,11 @@ spec:
               - name: postgres-certs
                 secret:
                   secretName: postgres-certs
+            envFrom:
+              - secretRef:
+                  name: postgres-credentials
+              - secretRef:
+                  name: ctapp-rabbitmq-production
             service:
               type: ClusterIP
               ports:
