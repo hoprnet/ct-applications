@@ -27,7 +27,7 @@ spec:
               RPCH_NODES: <random_rpch_endpoint>
               SUBGRAPH_URL: <random_subgraph_url>
               SC_ADDRESS: <random_sc_address>
-              MOCK_MODE: True
+              MOCK_MODE: 1
               PGSSLCERT: "/etc/postgres/certs/tls.crt"
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
