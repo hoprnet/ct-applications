@@ -39,6 +39,7 @@ spec:
               - name: postgres-certs
                 secret:
                   secretName: postgres-certs
+                  defaultMode: 384
             extraInitContainers:
               - name: init
                 image: busybox
