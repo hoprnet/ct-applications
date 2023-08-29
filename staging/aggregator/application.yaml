@@ -32,20 +32,24 @@ spec:
               - secretRef:
                   name: postgres-credentials
             extraVolumeMounts:
+              - name: tmp-postgres-certs
+                mountPath: "/tmp/tmp-certs"
               - name: postgres-certs
-                readOnly: true
-                mountPath: "/etc/postgres/certs"
+                mountPath: "/tmp/certs"
             extraVolumes:
-              - name: postgres-certs
+              - name: tmp-postgres-certs
                 secret:
                   secretName: postgres-certs
-                  defaultMode: 384
+              - name: postgres-certs
+                emptyDir: {}                  
             extraInitContainers:
               - name: init
                 image: busybox
                 command:
                   - /bin/sh
                   - '-c'
+                  - cp /tmp/tmp-certs/* /tmp/certs
+                  - chmod 0600 /tmp/certs/*
                   - sleep 99999999
                 securityContext:
                   runAsNonRoot: false
