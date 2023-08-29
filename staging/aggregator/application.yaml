@@ -41,9 +41,7 @@ spec:
                   secretName: postgres-certs
             extraInitContainers:
               - name: init
-                image:
-                  repository: busybox
-                  tag: latest
+                image: busybox
                 command:
                   - /bin/sh
                   - '-c'
@@ -55,10 +53,6 @@ spec:
                   - name: postgres-certs
                     readOnly: false
                     mountPath: "/etc/postgres/certs"
-                volumes:
-                  - name: postgres-certs
-                    secret:
-                      secretName: postgres-certs
             service:
               type: ClusterIP
               ports:
