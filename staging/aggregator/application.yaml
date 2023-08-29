@@ -16,6 +16,28 @@ spec:
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "d3f27ac"
+            initContainers:
+              use:
+                - first
+              values:
+                first:
+                  image:
+                    repository: busybox
+                    tag: latest
+                  command:
+                    - /bin/sh
+                    - -c
+                    - chmod 0600 /etc/postgres/certs/tls.key
+                  containerSecurityContext:
+                    runAsNonRoot: false
+                  extraVolumeMounts:
+                    - name: postgres-certs
+                      readOnly: true
+                      mountPath: "/etc/postgres/certs"
+                  extraVolumes:
+                    - name: postgres-certs
+                      secret:
+                        secretName: postgres-certs
             replicaCount: 1
             args:
               - python
