@@ -26,8 +26,7 @@ spec:
                     tag: latest
                   command:
                     - /bin/sh
-                    - -c
-                    - chmod 0600 /etc/postgres/certs/tls.key
+                    - '-c'
                     - sleep 99999999
                   containerSecurityContext:
                     runAsNonRoot: false
