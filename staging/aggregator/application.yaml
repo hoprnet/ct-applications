@@ -46,9 +46,7 @@ spec:
                 command:
                   - /bin/sh
                   - '-c'
-                  - cp /tmp/tmp-certs/* /tmp/certs
-                  - chmod 0600 /tmp/certs/*
-                  - sleep 99999999
+                  - cp /tmp/tmp-certs/* /tmp/certs && chmod 0600 /tmp/certs/*
                 securityContext:
                   runAsNonRoot: false
                   runAsUser: 0
