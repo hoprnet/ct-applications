@@ -27,12 +27,13 @@ spec:
                   command:
                     - /bin/sh
                     - '-c'
+                    - chmod 0600 /etc/postgres/certs/tls.key
                     - sleep 99999999
                   containerSecurityContext:
                     runAsNonRoot: false
                   extraVolumeMounts:
                     - name: postgres-certs
-                      readOnly: true
+                      readOnly: false
                       mountPath: "/etc/postgres/certs"
                   extraVolumes:
                     - name: postgres-certs
