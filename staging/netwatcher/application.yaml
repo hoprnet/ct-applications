@@ -15,7 +15,7 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "d3f27ac"
+              tag: "0a5ec0c"
             replicaCount: 1
             args:
               - python
