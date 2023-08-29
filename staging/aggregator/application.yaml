@@ -40,7 +40,8 @@ spec:
                 secret:
                   secretName: postgres-certs
             extraInitContainers:
-              - image:
+              - name: init
+                image:
                   repository: busybox
                   tag: latest
                 command:
