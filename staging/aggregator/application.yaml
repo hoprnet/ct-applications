@@ -32,10 +32,8 @@ spec:
               - secretRef:
                   name: postgres-credentials
             extraVolumeMounts:
-              - name: tmp-postgres-certs
-                mountPath: "/tmp/tmp-certs"
               - name: postgres-certs
-                mountPath: "/tmp/certs"
+                mountPath: "/etc/postgres/certs"
             extraVolumes:
               - name: tmp-postgres-certs
                 secret:
@@ -48,7 +46,6 @@ spec:
                 command:
                   - /bin/sh
                   - '-c'
-                  - sleep 99999999
                   - cp /tmp/tmp-certs/* /tmp/certs
                   - chmod 0600 /tmp/certs/*
                   - sleep 99999999
@@ -57,8 +54,9 @@ spec:
                   runAsUser: 0
                 volumeMounts:
                   - name: postgres-certs
-                    readOnly: false
-                    mountPath: "/etc/postgres/certs"
+                    mountPath: "/tmp/certs"
+                  - name: tmp-postgres-certs
+                    mountPath: "/tmp/tmp-certs"
             service:
               type: ClusterIP
               ports:
