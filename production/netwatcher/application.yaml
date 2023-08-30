@@ -15,8 +15,8 @@ spec:
           value: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "cfe2d99"
-            replicaCount: 0
+              tag: "d3f27ac"
+            replicaCount: 1
             args:
               - python
               - '-m'
@@ -24,8 +24,6 @@ spec:
             env:
               AGG_POST: http://production-aggregator.production:8080/aggregator/peers
               AGG_BALANCE: http://production-aggregator.production:8080/aggregator/balances
-              API_HOST: ""
-              API_KEY: ""
               LAT_COUNT: 10
               MOCK_MODE: True
   destination:
