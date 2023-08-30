@@ -17,6 +17,9 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "8187809"
             replicaCount: 1
+            containerSecurityContext:
+              enabled: true
+              runAsUser: 1001
             args:
               - python
               - '-m'
@@ -46,7 +49,7 @@ spec:
                 command:
                   - /bin/sh
                   - '-c'
-                  - cp /tmp/tmp-certs/* /tmp/certs && chmod 0400 /tmp/certs/*
+                  - cp /tmp/tmp-certs/* /tmp/certs && chmod 0400 /tmp/certs/* && chown 1001:1001 /tmp/certs/*
                 securityContext:
                   runAsNonRoot: false
                   runAsUser: 0
