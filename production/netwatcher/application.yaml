@@ -24,8 +24,6 @@ spec:
             env:
               AGG_POST: http://production-aggregator.production:8080/aggregator/peers
               AGG_BALANCE: http://production-aggregator.production:8080/aggregator/balances
-              API_HOST: <random_host>
-              API_KEY: <random_key>
               LAT_COUNT: 10
               MOCK_MODE: True
   destination:
