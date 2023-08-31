@@ -22,8 +22,8 @@ spec:
           - '-m'
           - netwatcher
         env:
-          AGG_POST: http://staging-aggregator.staging:8080/aggregator/peers
-          AGG_BALANCE: http://staging-aggregator.staging:8080/aggregator/balances
+          AGG_POST: http://aggregator.staging:8080/aggregator/peers
+          AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
           LAT_COUNT: 10
           MOCK_MODE: True
         envFrom:
