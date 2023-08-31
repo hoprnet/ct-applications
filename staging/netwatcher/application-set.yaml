@@ -16,7 +16,7 @@ spec:
       name: '{{name}}'
       namespace: staging
     spec:
-      project: staging
+      project: default
       source:
         repoURL: https://dysnix.github.io/charts
         targetRevision: 0.99.16
