@@ -13,7 +13,7 @@ spec:
           - name: netwatcher-4
   template:
     metadata:
-      name: '{{ name }}'
+      name: '{{name}}'
       namespace: staging
     spec:
       project: staging
@@ -38,7 +38,7 @@ spec:
               MOCK_MODE: True
             envFrom:
               - secretRef:
-                  name: {{ name }}
+                  name: '{{name}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: staging
