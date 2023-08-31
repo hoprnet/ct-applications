@@ -11,29 +11,29 @@ spec:
     chart: app
     helm:
       values: |
-            image:
-              repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "e393434"
-            replicaCount: 0
-            args:
-              - /bin/sh
-              - -c
-              - |
-                node_address=$(python -m postman 2>&1 | tail -n 1)
-                echo $node_address
-                celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
-            env:
-              PROJECT_NAME: ct-app
-              TASK_NAME: send_1_hop_message
-              API_HOST: ""
-              API_KEY: ""
-            envFrom:
-              - secretRef:
-                  name: ctapp-rabbitmq-production
-            service:
-              type: ClusterIP
-              ports:
-                http: 8080
+        image:
+          repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+          tag: "e393434"
+        replicaCount: 0
+        args:
+          - /bin/sh
+          - -c
+          - |
+            node_address=$(python -m postman 2>&1 | tail -n 1)
+            echo $node_address
+            celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
+        env:
+          PROJECT_NAME: ct-app
+          TASK_NAME: send_1_hop_message
+          API_HOST: ""
+          API_KEY: ""
+        envFrom:
+          - secretRef:
+              name: ctapp-rabbitmq-production
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: production

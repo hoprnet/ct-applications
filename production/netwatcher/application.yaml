@@ -11,19 +11,19 @@ spec:
     chart: app
     helm:
       values: |
-            image:
-              repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "d3f27ac"
-            replicaCount: 1
-            args:
-              - python
-              - '-m'
-              - netwatcher
-            env:
-              AGG_POST: http://production-aggregator.production:8080/aggregator/peers
-              AGG_BALANCE: http://production-aggregator.production:8080/aggregator/balances
-              LAT_COUNT: 10
-              MOCK_MODE: True
+        image:
+          repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+          tag: "d3f27ac"
+        replicaCount: 1
+        args:
+          - python
+          - '-m'
+          - netwatcher
+        env:
+          AGG_POST: http://production-aggregator.production:8080/aggregator/peers
+          AGG_BALANCE: http://production-aggregator.production:8080/aggregator/balances
+          LAT_COUNT: 10
+          MOCK_MODE: True
   destination:
     server: https://kubernetes.default.svc
     namespace: production
