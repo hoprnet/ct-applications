@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postmanfeedback
+  name: postman-feedback
   namespace: staging
 spec:
   project: staging
