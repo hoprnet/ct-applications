@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netwatcher-3
+  namespace: staging
+spec:
+  project: staging
+  source:
+    repoURL: https://dysnix.github.io/charts
+    targetRevision: 0.99.16
+    chart: app
+    helm:
+      values: |
+        image:
+          repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+          tag: "935c885"
+        replicaCount: 1
+        args:
+          - python
+          - '-m'
+          - netwatcher
+        env:
+          AGG_POST: http://staging-aggregator.staging:8080/aggregator/peers
+          AGG_BALANCE: http://staging-aggregator.staging:8080/aggregator/balances
+          LAT_COUNT: 10
+          MOCK_MODE: True
+        envFrom:
+          - secretRef:
+              name: netwatcher-3
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
