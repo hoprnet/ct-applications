@@ -13,7 +13,7 @@ spec:
           - name: netwatcher-4
   template:
     metadata:
-      name: {{ name }}
+      name: '{{ name }}'
       namespace: staging
   spec:
     project: staging
