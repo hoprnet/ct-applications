@@ -21,26 +21,24 @@ spec:
       repoURL: https://dysnix.github.io/charts
       targetRevision: 0.99.16
       chart: app
-      plugin:
-        env:
-          - name: HELM_VALUES
-            value: |
-              image:
-                repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-                tag: "935c885"
-              replicaCount: 0
-              args:
-                - python
-                - '-m'
-                - netwatcher
-              env:
-                AGG_POST: http://staging-aggregator.staging:8080/aggregator/peers
-                AGG_BALANCE: http://staging-aggregator.staging:8080/aggregator/balances
-                LAT_COUNT: 10
-                MOCK_MODE: True
-              envFrom:
-                - secretRef:
-                    name: {{ name }}
+      helm:
+        values: |
+          image:
+            repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+            tag: "935c885"
+          replicaCount: 0
+          args:
+            - python
+            - '-m'
+            - netwatcher
+          env:
+            AGG_POST: http://staging-aggregator.staging:8080/aggregator/peers
+            AGG_BALANCE: http://staging-aggregator.staging:8080/aggregator/balances
+            LAT_COUNT: 10
+            MOCK_MODE: True
+          envFrom:
+            - secretRef:
+                name: {{ name }}
     destination:
       server: https://kubernetes.default.svc
       namespace: staging

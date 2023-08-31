@@ -9,59 +9,57 @@ spec:
     repoURL: https://dysnix.github.io/charts
     targetRevision: 0.99.16
     chart: app
-    plugin:
-      env:
-        - name: HELM_VALUES
-          value: |
-            image:
-              repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "935c885"
-            replicaCount: 1
-            containerSecurityContext:
-              enabled: true
-              runAsUser: 1001
-            args:
-              - python
-              - '-m'
-              - aggregator
-            env:
-              API_HOST: 0.0.0.0
-              API_PORT: 8080
-              PGSSLCERT: "/etc/postgres/certs/tls.crt"
-              PGSSLKEY: "/etc/postgres/certs/tls.key"
-              PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
-              PGSSLMODE: verify-ca
-            envFrom:
-              - secretRef:
-                  name: postgres-credentials
-            extraVolumeMounts:
+    helm:
+      values: |
+        image:
+          repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+          tag: "935c885"
+        replicaCount: 1
+        containerSecurityContext:
+          enabled: true
+          runAsUser: 1001
+        args:
+          - python
+          - '-m'
+          - aggregator
+        env:
+          API_HOST: 0.0.0.0
+          API_PORT: 8080
+          PGSSLCERT: "/etc/postgres/certs/tls.crt"
+          PGSSLKEY: "/etc/postgres/certs/tls.key"
+          PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
+          PGSSLMODE: verify-ca
+        envFrom:
+          - secretRef:
+              name: postgres-credentials
+        extraVolumeMounts:
+          - name: postgres-certs
+            mountPath: "/etc/postgres/certs"
+        extraVolumes:
+          - name: tmp-postgres-certs
+            secret:
+              secretName: postgres-certs
+          - name: postgres-certs
+            emptyDir: {}
+        extraInitContainers:
+          - name: init
+            image: busybox
+            command:
+              - /bin/sh
+              - '-c'
+              - cp /tmp/tmp-certs/* /tmp/certs && chmod 0400 /tmp/certs/* && chown 1001:1001 /tmp/certs/*
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
+            volumeMounts:
               - name: postgres-certs
-                mountPath: "/etc/postgres/certs"
-            extraVolumes:
+                mountPath: "/tmp/certs"
               - name: tmp-postgres-certs
-                secret:
-                  secretName: postgres-certs
-              - name: postgres-certs
-                emptyDir: {}                  
-            extraInitContainers:
-              - name: init
-                image: busybox
-                command:
-                  - /bin/sh
-                  - '-c'
-                  - cp /tmp/tmp-certs/* /tmp/certs && chmod 0400 /tmp/certs/* && chown 1001:1001 /tmp/certs/*
-                securityContext:
-                  runAsNonRoot: false
-                  runAsUser: 0
-                volumeMounts:
-                  - name: postgres-certs
-                    mountPath: "/tmp/certs"
-                  - name: tmp-postgres-certs
-                    mountPath: "/tmp/tmp-certs"
-            service:
-              type: ClusterIP
-              ports:
-                http: 8080
+                mountPath: "/tmp/tmp-certs"
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
