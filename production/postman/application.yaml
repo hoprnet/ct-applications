@@ -9,10 +9,8 @@ spec:
     repoURL: https://dysnix.github.io/charts
     targetRevision: 0.99.16
     chart: app
-    plugin:
-      env:
-        - name: HELM_VALUES
-          value: |
+    helm:
+      values: |
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "e393434"
