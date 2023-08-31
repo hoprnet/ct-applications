@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggtrigger
+  name: aggregator-trigger
   namespace: staging
 spec:
   project: staging
@@ -11,6 +11,8 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: aggregator-trigger
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "935c885"

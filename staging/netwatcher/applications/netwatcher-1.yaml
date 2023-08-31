@@ -11,6 +11,8 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: netwatcher-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "935c885"
