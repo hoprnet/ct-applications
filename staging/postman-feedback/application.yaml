@@ -30,12 +30,28 @@ spec:
           PGSSLMODE: verify-ca
         extraVolumeMounts:
           - name: postgres-certs
-            readOnly: true
             mountPath: "/etc/postgres/certs"
         extraVolumes:
-          - name: postgres-certs
+          - name: tmp-postgres-certs
             secret:
               secretName: postgres-certs
+          - name: postgres-certs
+            emptyDir: {}
+        extraInitContainers:
+          - name: init
+            image: busybox
+            command:
+              - /bin/sh
+              - '-c'
+              - cp /tmp/tmp-certs/* /tmp/certs && chmod 0400 /tmp/certs/* && chown 1001:1001 /tmp/certs/*
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
+            volumeMounts:
+              - name: postgres-certs
+                mountPath: "/tmp/certs"
+              - name: tmp-postgres-certs
+                mountPath: "/tmp/tmp-certs"
         envFrom:
           - secretRef:
               name: postgres-credentials
