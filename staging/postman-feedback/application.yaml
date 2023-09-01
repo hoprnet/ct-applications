@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postman-feedback
+  namespace: staging
+spec:
+  project: staging
+  source:
+    repoURL: https://dysnix.github.io/charts
+    targetRevision: 0.99.16
+    chart: app
+    helm:
+      values: |
+        app:
+          name: postman-feedback
+        image:
+          repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+          tag: "935c885"
+        replicaCount: 0
+        args:
+          - /bin/sh
+          - -c
+          - |
+            celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feeback_queue
+        env:
+          PROJECT_NAME: ct-app
+          PGSSLCERT: "/etc/postgres/certs/tls.crt"
+          PGSSLKEY: "/etc/postgres/certs/tls.key"
+          PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
+          PGSSLMODE: verify-ca
+        extraVolumeMounts:
+          - name: postgres-certs
+            readOnly: true
+            mountPath: "/etc/postgres/certs"
+        extraVolumes:
+          - name: postgres-certs
+            secret:
+              secretName: postgres-certs
+        envFrom:
+          - secretRef:
+              name: postgres-credentials
+          - secretRef:
+              name: rabbitmq
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

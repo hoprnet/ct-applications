@@ -37,6 +37,8 @@ spec:
             envFrom:
               - secretRef:
                   name: postgres-credentials
+              - secretRef:
+                  name: rabbitmq
             extraVolumeMounts:
               - name: postgres-certs
                 readOnly: true
