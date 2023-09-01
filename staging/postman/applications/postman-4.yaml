@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman
+  name: postman-4
   namespace: staging
 spec:
   project: staging
