@@ -15,8 +15,8 @@ spec:
           name: netwatcher-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "935c885"
-        replicaCount: 1
+          tag: "967a1b8"
+        replicaCount: 0
         args:
           - python
           - '-m'
@@ -24,8 +24,8 @@ spec:
         env:
           AGG_POST: http://aggregator.staging:8080/aggregator/peers
           AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
-          LAT_COUNT: 10
-          MOCK_MODE: True
+          LAT_COUNT: 5
+          MOCK_MODE: 0
         envFrom:
           - secretRef:
               name: hopr-1
