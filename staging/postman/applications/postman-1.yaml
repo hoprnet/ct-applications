@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: netwatcher-2
+  name: postman
   namespace: staging
 spec:
   project: staging
@@ -12,23 +12,30 @@ spec:
     helm:
       values: |
         app:
-          name: netwatcher-2
+          name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "935c885"
-        replicaCount: 1
+        replicaCount: 0
         args:
-          - python
-          - '-m'
-          - netwatcher
+          - /bin/sh
+          - -c
+          - |
+            node_address=$(python -m postman 2>&1 | tail -n 1)
+            echo $node_address
+            celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
-          AGG_POST: http://aggregator.staging:8080/aggregator/peers
-          AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
-          LAT_COUNT: 10
-          MOCK_MODE: True
+          PROJECT_NAME: ct-app
+          TASK_NAME: send_1_hop_message
         envFrom:
           - secretRef:
-              name: hopr-2
+              name: rabbitmq
+          - secretRef:
+              name: hopr-1
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
