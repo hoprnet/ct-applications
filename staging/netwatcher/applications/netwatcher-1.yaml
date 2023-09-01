@@ -28,7 +28,7 @@ spec:
           MOCK_MODE: True
         envFrom:
           - secretRef:
-              name: netwatcher-1
+              name: hopr-1
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
