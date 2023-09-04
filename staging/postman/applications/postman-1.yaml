@@ -15,14 +15,13 @@ spec:
           name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "3bd570c"
-        replicaCount: 0
+          tag: "06b2775"
+        replicaCount: 1
         args:
           - /bin/sh
           - -c
           - |
-            node_address=$(python -m postman 2>&1 | tail -n 1)
-            echo $node_address
+            node_address=$(curl -X 'GET' http://${API_HOST}/api/v3/account/address -H 'accept: application/json' -s  -H "x-auth-token: ${API_KEY}" | jq -r '.hopr')
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
