@@ -29,6 +29,7 @@ spec:
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
+              TASK_NAME: fake_task
             envFrom:
               - secretRef:
                   name: postgres-credentials
