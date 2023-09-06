@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: rpch
+  namespace: staging
+spec:
+  encryptedData:
+    RPCH_NODES: AgAaF1Ec60Cme/eGg7At9bM1DxvxMKChbkQ+sWLZEDkh/inXqVLnY6GWesv1ya3wXsq7mE0s7rW9s+9JoZwfF2JAGludgy8wn/aVz86ka2bdFudAWTjrIeAdI9nxAFfAQeAO2OlCuIw+Tfz2yHnZ8+KTr9+MOeBETxVOVQDcZj0/+gWCmDCTza22RVXs1Tsj3AC0cpyLQm137OtqitE3RyaOBSYDNN+RgeUbrEmGiODHQ21JBU0fvoNxWbIzLQOPNd6o654s5Rp+XW6X+rLiQw2NDGZwb85YYUf/a0ky07Rbw50XOOEHKITDCavAuKYFdlXBg58N4FVE+VXVKQsNIc95TU7dPx4rc9s7TT7JMrxWkPSPMSUg36A4l3rsj0TrY6BqTVG8c2EUbJBV7JYBGvo8cqgdFKrV3NLSwW1LZj3Wkq3vgQcbfvLB/Tw23VHA9TRa7GublyeSFBqxMNxP7qy0fxi1W+m0SsaQsOqmjz0+/exOgKdwS4NJdGFK2BWAEDrRl0tnsPEgM5f7iC2IY4umcW9WiOdB76ey12TtzlsL9KTtIb/G9rqsT0V3RcBNXadn4fE5iljp1BmoRJsJ/rQcE0L7d0Uhirr54oT8ejvkSlUJDt+lrS/602qM9zSPOGaCl/hVZB83VbaP3gMCXEeM9QgUHbcvOKz6AwY+XUUnNakUqyuWcCDvn3jt/pLQrOjTQFuGkISEIxkIOfUVDP31TmbjlOGaCOhgoJEczYy+yhQ+I/57DsyHNTkrnvq9/NROJ7wo
+  template:
+    metadata:
+      creationTimestamp: null
+      name: rpch
+      namespace: staging
+

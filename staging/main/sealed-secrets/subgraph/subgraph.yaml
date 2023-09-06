@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: subgraph
+  namespace: staging
+spec:
+  encryptedData:
+    SUBGRAPH_URL: AgBgKqDsREfwB2c723FEkS4hBEYKk2pj7+dOOQmhH0wp1M59GvlME0Rwj1fr5PoBCcEcliFSScj98AYvP5/x7ort3x7SeuQSQZbDn66vAHViefxquMQ4WMufMJLVGFEhnobCj5/xkt/LRMHMXqBuHEc8+Bhr+EOAVVLvck0M1K1VDIDBptxT28RJYIvavXEibLXSqTXsh+/GlxbdP54x9YTgNtGTXCCcS4dYwN/dOavi5qI+11IYWJPaIDdF2dTqVyr04ZS25QWuzg7WQZSDNr/0oF+6D+j+gPLkQy5zfk4U0BBpteq8/1dJj159QcHlxMQNeGwax/wY62/xaCHGchmRe8Jk6iwj5dJaOMTValoKP+RoMqW2UELSYfpkyNN/D5OuNw988vkaeQ8Z8IhBm1o6otz4zJnNJhjIMNZxWxZJ8KB2tb0gEol7lx5+Y7yL7/ZNU9ERz8r80vWVy1jS1TxdX0pUjtQZw29j0eiF9RrVuNNEyiVVFU86AmgGduehiUM4osJk3WVVhJjfamdhHQNCs/hd7WBGVxzXOwCvmvmhkXCEV2jbH7DIQdo1yZcaped88akKoyXSCoR8MHAzc8eqw9UFM/DFEx4pIzquCxF6dTUMGw3fcZce+ZEoxv0TpdW/4Qkwm1h/+6eS4t4MJsEEav5UboYt8Kd4/4gqwNrKkhGuGI/7Bj8bKKfxqHZl99AMdRKaoyGp6z+R2eWHCB/8x3r9Gj8e450nfEu2T+0wV4RWikTIJ6ZuOZvgYATqnxVeECrNvaDo5n62vWNv6E4wILxQULk4pDqPP8JtimIYGPL6U/1JwunLFhaOc0dmyyTqNCukZs5Yr/HKeWkASiu6/0Y8cF1R7w7SMS7rUg==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: subgraph
+      namespace: staging
+

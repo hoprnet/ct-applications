@@ -24,9 +24,6 @@ spec:
               - '-m'
               - economic_handler
             env:
-              RPCH_NODES: <random_rpch_endpoint>
-              SUBGRAPH_URL: <random_subgraph_url>
-
               MOCK_MODE: '0'
               PGSSLCERT: "/etc/postgres/certs/tls.crt"
               PGSSLKEY: "/etc/postgres/certs/tls.key"
@@ -38,7 +35,11 @@ spec:
               - secretRef:
                   name: rabbitmq
               - secretRef:
-                  name: hopr-2
+                  name: hopr-5
+              - secretRef:
+                  name: subgraph
+              - secretRef:
+                  name: rpch
             extraVolumeMounts:
               - name: postgres-certs
                 mountPath: "/etc/postgres/certs"
