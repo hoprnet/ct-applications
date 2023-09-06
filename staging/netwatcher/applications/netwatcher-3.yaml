@@ -15,7 +15,7 @@ spec:
           name: netwatcher-3
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "2716d5c"
+          tag: "latest"
         replicaCount: 1
         args:
           - python
