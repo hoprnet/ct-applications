@@ -1,12 +1,12 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: economichandler
+  name: economic-handler
   namespace: staging
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/instance: staging-economichandler
+      app.kubernetes.io/instance: economic-handler
   endpoints:
     - port: "http"
       interval: 30s
