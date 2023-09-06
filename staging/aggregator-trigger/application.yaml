@@ -22,7 +22,7 @@ spec:
           - '-m'
           - aggregator_trigger
         env:
-          AGGREGATOR_URL: http://aggregator.staging:8080/
+          AGGREGATOR_URL: http://aggregator.staging:8080
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
