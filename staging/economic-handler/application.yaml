@@ -17,7 +17,7 @@ spec:
               name: economic-handler
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "d0ff507"
+              tag: "6db7640"
             replicaCount: 1
             args: 
               - python
@@ -29,7 +29,7 @@ spec:
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
-              TASK_NAME: fake_task
+              TASK_NAME: send_1_hop_message
               PROJECT_NAME: ct-app
             envFrom:
               - secretRef:
