@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman-4
-  namespace: staging
+  name: postman-1
+  namespace: production
 spec:
-  project: staging
+  project: production
   source:
     repoURL: https://dysnix.github.io/charts
     targetRevision: 0.99.16
@@ -15,8 +15,8 @@ spec:
           name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "1e479d4"
-        replicaCount: 1
+          tag: "6bddf46"
+        replicaCount: 0
         args:
           - /bin/sh
           - -c
@@ -26,19 +26,19 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          TIMEOUT: "600000"
+          TIMEOUT: 600
         envFrom:
           - secretRef:
-              name: rabbitmq-staging
+              name: rabbitmq-production
           - secretRef:
-              name: hopr-4
+              name: hopr-1
         service:
           type: ClusterIP
           ports:
             http: 8080
   destination:
     server: https://kubernetes.default.svc
-    namespace: staging
+    namespace: production
   syncPolicy:
     automated:
       prune: true
@@ -47,3 +47,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
+      

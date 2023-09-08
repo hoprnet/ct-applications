@@ -56,7 +56,7 @@ spec:
           - secretRef:
               name: postgres-credentials
           - secretRef:
-              name: rabbitmq
+              name: rabbitmq-staging
         service:
           type: ClusterIP
           ports:

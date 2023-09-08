@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: netwatcher
+  name: netwatcher-3
   namespace: production
 spec:
   project: production
@@ -11,19 +11,24 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: netwatcher-3
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "d3f27ac"
-        replicaCount: 1
+          tag: "591e2b9"
+        replicaCount: 0
         args:
           - python
           - '-m'
           - netwatcher
         env:
-          AGG_POST: http://production-aggregator.production:8080/aggregator/peers
-          AGG_BALANCE: http://production-aggregator.production:8080/aggregator/balances
-          LAT_COUNT: 10
-          MOCK_MODE: True
+          AGG_POST: http://aggregator.production:8080/aggregator/peers
+          AGG_BALANCE: http://aggregator.production:8080/aggregator/balances
+          LAT_COUNT: 5
+          MOCK_MODE: '0'
+        envFrom:
+          - secretRef:
+              name: hopr-3
   destination:
     server: https://kubernetes.default.svc
     namespace: production
@@ -35,3 +40,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
+      

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman
+  name: postman-2
   namespace: production
 spec:
   project: production
@@ -11,10 +11,12 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "e393434"
-        replicaCount: 1
+          tag: "6bddf46"
+        replicaCount: 0
         args:
           - /bin/sh
           - -c
@@ -24,12 +26,12 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          TASK_NAME: send_1_hop_message
-          API_HOST: ""
-          API_KEY: ""
+          TIMEOUT: 600
         envFrom:
           - secretRef:
-              name: ctapp-rabbitmq-production
+              name: rabbitmq-production
+          - secretRef:
+              name: hopr-2
         service:
           type: ClusterIP
           ports:
@@ -45,3 +47,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
+      

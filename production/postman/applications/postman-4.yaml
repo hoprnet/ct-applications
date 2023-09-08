@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggtrigger
+  name: postman-4
   namespace: production
 spec:
   project: production
@@ -11,16 +11,31 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "0195a42"
+          tag: "e393434"
         replicaCount: 1
-        args: 
-          - python
-          - '-m'
-          - aggregator_trigger
+        args:
+          - /bin/sh
+          - -c
+          - |
+            node_address=$(python -m postman 2>&1 | tail -n 1)
+            echo $node_address
+            celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
-          POST_TO_DB_ENDPOINT: http://production-aggregator.production:8080/aggregator/to_db
+          PROJECT_NAME: ct-app
+          TIMEOUT: 600
+        envFrom:
+          - secretRef:
+              name: rabbitmq-production
+          - secretRef:
+              name: hopr-4
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: production

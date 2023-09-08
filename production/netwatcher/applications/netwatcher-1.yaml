@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman-1
-  namespace: staging
+  name: netwatcher-1
+  namespace: production
 spec:
-  project: staging
+  project: production
   source:
     repoURL: https://dysnix.github.io/charts
     targetRevision: 0.99.16
@@ -12,33 +12,26 @@ spec:
     helm:
       values: |
         app:
-          name: postman-1
+          name: netwatcher-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "1e479d4"
-        replicaCount: 1
+          tag: "591e2b9"
+        replicaCount: 0
         args:
-          - /bin/sh
-          - -c
-          - |
-            node_address=$(python -m postman 2>&1 | tail -n 1)
-            echo $node_address
-            celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
+          - python
+          - '-m'
+          - netwatcher
         env:
-          PROJECT_NAME: ct-app
-          TIMEOUT: "600000"
+          AGG_POST: http://aggregator.production:8080/aggregator/peers
+          AGG_BALANCE: http://aggregator.production:8080/aggregator/balances
+          LAT_COUNT: 5
+          MOCK_MODE: '0'
         envFrom:
           - secretRef:
-              name: rabbitmq-staging
-          - secretRef:
               name: hopr-1
-        service:
-          type: ClusterIP
-          ports:
-            http: 8080
   destination:
     server: https://kubernetes.default.svc
-    namespace: staging
+    namespace: production
   syncPolicy:
     automated:
       prune: true
