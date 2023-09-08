@@ -70,7 +70,7 @@ spec:
                     mountPath: "/tmp/tmp-certs"
             serviceAccount:
               annotations:
-                iam.gke.io/gcp-service-account: ARGOCD_ENV_CLUSTER_NAME-ct@ARGOCD_ENV_GOOGLE_PROJECT.iam.gserviceaccount.com
+                iam.gke.io/gcp-service-account: ARGOCD_ENV_CLUSTER_NAME-ct-production@ARGOCD_ENV_GOOGLE_PROJECT.iam.gserviceaccount.com
             service:
               type: ClusterIP
               ports:
