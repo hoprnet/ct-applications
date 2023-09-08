@@ -6,6 +6,6 @@ metadata:
   namespace: rabbitmq
 spec:
   importCredentialsSecret:
-    name: rabbitmq
+    name: rabbitmq-staging
   rabbitmqClusterReference:
     name: rabbitmq-ha-cluster

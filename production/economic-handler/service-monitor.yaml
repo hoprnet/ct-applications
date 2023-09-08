@@ -1,13 +1,13 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: aggregator
+  name: economic-handler
   namespace: production
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/instance: aggregator
+      app.kubernetes.io/instance: production-economic-handler
   endpoints:
     - port: "http"
       interval: 30s
-      path: /aggregator/metrics
+      path: /metrics

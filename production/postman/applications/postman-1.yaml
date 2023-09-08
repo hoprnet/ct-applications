@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman-3
-  namespace: staging
+  name: postman-1
+  namespace: production
 spec:
-  project: staging
+  project: production
   source:
     repoURL: https://dysnix.github.io/charts
     targetRevision: 0.99.16
@@ -12,10 +12,10 @@ spec:
     helm:
       values: |
         app:
-          name: postman-3
+          name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "282f98e"
+          tag: "6bddf46"
         replicaCount: 0
         args:
           - /bin/sh
@@ -29,16 +29,16 @@ spec:
           TIMEOUT: "600"
         envFrom:
           - secretRef:
-              name: rabbitmq-staging
+              name: rabbitmq-production
           - secretRef:
-              name: hopr-3
+              name: hopr-1
         service:
           type: ClusterIP
           ports:
             http: 8080
   destination:
     server: https://kubernetes.default.svc
-    namespace: staging
+    namespace: production
   syncPolicy:
     automated:
       prune: true

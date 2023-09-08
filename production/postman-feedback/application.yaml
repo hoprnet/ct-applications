@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postmanfeedback
+  name: postman-feedback
   namespace: production
 spec:
   project: production
@@ -11,15 +11,17 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: postman-feedback
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "e393434"
-        replicaCount: 1
+        replicaCount: 0
         args:
           - /bin/sh
           - -c
           - |
-            celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feeback_queue
+            celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feedback
         env:
           PROJECT_NAME: ct-app
           PGSSLCERT: "/etc/postgres/certs/tls.crt"
@@ -28,17 +30,33 @@ spec:
           PGSSLMODE: verify-ca
         extraVolumeMounts:
           - name: postgres-certs
-            readOnly: true
             mountPath: "/etc/postgres/certs"
         extraVolumes:
-          - name: postgres-certs
+          - name: tmp-postgres-certs
             secret:
               secretName: postgres-certs
+          - name: postgres-certs
+            emptyDir: {}
+        extraInitContainers:
+          - name: init
+            image: busybox
+            command:
+              - /bin/sh
+              - '-c'
+              - cp /tmp/tmp-certs/* /tmp/certs && chmod 0400 /tmp/certs/* && chown 1001:1001 /tmp/certs/*
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
+            volumeMounts:
+              - name: postgres-certs
+                mountPath: "/tmp/certs"
+              - name: tmp-postgres-certs
+                mountPath: "/tmp/tmp-certs"
         envFrom:
           - secretRef:
               name: postgres-credentials
           - secretRef:
-              name: ctapp-rabbitmq-production
+              name: rabbitmq-production
         service:
           type: ClusterIP
           ports:
@@ -54,3 +72,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
+

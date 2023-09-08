@@ -26,10 +26,10 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          TIMEOUT: "600000"
+          TIMEOUT: "600"
         envFrom:
           - secretRef:
-              name: rabbitmq
+              name: rabbitmq-staging
           - secretRef:
               name: hopr-1
         service:

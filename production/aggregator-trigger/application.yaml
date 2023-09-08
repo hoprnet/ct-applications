@@ -11,16 +11,18 @@ spec:
     chart: app
     helm:
       values: |
+        app:
+          name: aggregator-trigger
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "0195a42"
-        replicaCount: 1
+        replicaCount: 0
         args: 
           - python
           - '-m'
           - aggregator_trigger
         env:
-          POST_TO_DB_ENDPOINT: http://production-aggregator.production:8080/aggregator/to_db
+          AGGREGATOR_URL: http://aggregator.production:8080
   destination:
     server: https://kubernetes.default.svc
     namespace: production

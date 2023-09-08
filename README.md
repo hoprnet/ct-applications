@@ -9,7 +9,7 @@ Download the Postgres client cert, client cert key, and CA key from the Secrets 
 ```shell
 #!/usr/bin/env bash
 
-export ENVIRONMENT_NAME=staging #TODO - change to the name of your respective environment
+export ENVIRONMENT_NAME=production #TODO - change to the name of your respective environment
 
 mkdir -p tmp && cd tmp
 
