@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         app:
-          name: postman-1
+          name: postman-2
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "6bddf46"
@@ -26,7 +26,7 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          TIMEOUT: 600
+          TIMEOUT: "600"
         envFrom:
           - secretRef:
               name: rabbitmq-production
