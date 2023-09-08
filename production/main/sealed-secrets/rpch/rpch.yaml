@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: rpch
+  namespace: production
+spec:
+  encryptedData:
+    RPCH_NODES: AgA4/Le20OXmpYptM+wCUy6jONwg7Yj5y1KVjz0+NZaLQh+deaP9OJcj8r9A4YRZz350CrXdNnmZTVatnbmZz8uvpPmbsMN8SfL9VjGSI0SYM1CcuS4t+z0lDQ8Hzs71+evlQJA7/K+cZkScEjzsHEzABHYRscClF8UXFTVJD7wFpvRjGgcw/U1IQE4nraUFzxn9pkMB7q0pkrzAlMolWmJQi9Nn2FlmKisD/YoB6EJ2nBlC9eqfC/vJuFaYxTZSiWjP8TbhxNSzhLiG4qEtLRE9oYGDf+G+Sz/BBCXGQB4ket/expcWZdUzACrgMJNhLoDzOX3QWuo+lBpANDp3RRx9gui8yjeV9KDg8SSTC8TiHd6zwGKnpUfh7kWjLgs1AZyr56CdnXilbvXRkbbauN8O6E0jRE9W+GTP2seBS5z0GlDFLzWk0Bk3XDN7c9EsZJNl7Y/wPY9GgaGqwykH9wc9q36QEEcsMHqZ2+/twMp/2k97xyEJrNZl3KD7VWl5pbMoIqp1+c5qz36SdxF6G9f36FCGQhq7iODe0o+UkzgIeJ4wKLf2AqZxly8dt4DW9C1c+2KRM8IkFFtihk7zrHLzf6qNqt79en+H0d/EdURpTPvF0iHLax/awhvxMl8C9glRfR/zYnteKiX4tTBdqI54m7oQIX0o5CyANnUslnmiIinfDfvAWLKyhb1AqSPnP4iHBt7w1kBfe+YJZAc+w2iAt1fysDsIP0niQLFAC8f3Mwt+k3XiPcBDZH26Phj2vRR1gA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: rpch
+      namespace: production
+

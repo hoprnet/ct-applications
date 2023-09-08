@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: subgraph-rotsee
+  namespace: production
+spec:
+  encryptedData:
+    SUBGRAPH_URL: AgCIcJxpevIgsdeziSrAA4Is7jWpIqTPf/a/RmDStPX6/gihPnXuUG/ku5FC+y0BAKyWSTI+cW5mX5djg7yKEFV54CoxL9QpqW7nw+V0BhsqpFA9YyhB9YKhOW2VWaHD2ioJZs1P+NizUjiYU+KlgyPRVjhgBxhcpCMNgr58oPwPAN5t3gJVq9cNr/j0mz3tL3lDCM3CE6J3JYO0Hfu0h0GpbM+pde3ovxx2Zb5xorSwojmAoZCaEIHXoz3d79txGT99xFEQRSa3FDUNnhJsaetIjhLLeGUHUNSF9Po6fXJ1qobbkdcnWieol7qANeiU4NVEV/ie+RxyBd9s02Rmzn4/kWb7gRYG6ybcyyvegHlDvNr/r4et88tySanmt73yFReEzUx53b9oJggyjrmpD8HTJi+JZ52lxFjH6Ns+uHjNrw1BM5ANIElZp1OlsZjYxWmDg/cX01shpA4fLjqMZ+guYCQ06zmEMzsoTHxOcVlD20hICP4w/chl2S70FPr/u94ysQjjF564ukG6zPWDM5xcTPbjeffI8XcGhLoC4ecBGnFiL4CNatb9DxoPx+QXhV0au9o30JtdrETU9PLWcZCxYmbTyToBWlRhhoznFS+8YwtQd9a/xcusXnW5WH9rwXXIt45J2D+PDEQElTYryz6JDWbFj2Gd8y0ZRJ0mt8q2P3sKwueWxgKE2EpCUZ31XVQBDtTGMyyKpcSMr4++e1OCT8oIWTBympvPhRmhdbdGGYwInV/QdOf0PIz4oMz5YTCRF1TOMzkW0hPsVfcogCyUaNgDVlQKW3VgDkzUnPUw5thzspcdvjPNVKX6RrbZngrFwPPzaOmv43SlHsVw+KnEIP0HXrt4OlR3Q1M=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: subgraph-rotsee
+      namespace: production
+

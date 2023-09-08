@@ -26,6 +26,7 @@ spec:
           AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
           LAT_COUNT: 5
           MOCK_MODE: '0'
+          MOCK_LATENCY: '1'
         envFrom:
           - secretRef:
               name: hopr-4

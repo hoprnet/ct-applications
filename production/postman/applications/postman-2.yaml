@@ -15,8 +15,8 @@ spec:
           name: postman-2
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "6bddf46"
-        replicaCount: 0
+          tag: "latest"
+        replicaCount: 1
         args:
           - /bin/sh
           - -c
