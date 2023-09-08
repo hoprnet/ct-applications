@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: subgraph-dufour
+  namespace: staging
+spec:
+  encryptedData:
+    SUBGRAPH_URL: AgA7oe0eSEO0BCggkO3mfNA5lnzgBtJEPPxEyvXJk2urvag6KtTSTki1RUELiLNRW2pkn8yuTvQ0KFjfa7afM/NvX5bJ7ruGfZ37J4xS+gLRApB8m/T6FkdzFIf5pr/RkH5/Ke7LyN9uCsXdzrxo8ZUxYXAjQYtKh+si1LsETmxWMs1CyPjC0YWLgqXdvz1OqFfqlM5nLBzlRdqjMGaUy2/6mAkEnwTahAklE6b9PamGZcfHbB9EKDknVlapE5lBmpGXzrs6g3468p3uBREisboBg85CNzdQ360ntMNmPZI8PMx4unCR4Ngbu4R1hMFr5Ncldvj29Bwd3N6dhJxIBgLNmvgTne4Fu6ytIUDjdUX0Rdjex8g6chvwV2VGimGmvcpzRIlUPbWCMXy47s/coZ0K/VmdPV29CqiS47o74IEmTgZnwFmWG0cd3t4i7uw6dwjqw+es2M1vUYXrRvX3vavB2scKC/vjfnXqvG9rSEadUFo4c53s3iIo3JPgv9o5m8091QkrXmVYHNUpTg2riEEjZOqDhwh7FW7xOcVbf62O2/txatyezScWJYRjOPHn5D+1+A0JjrlkJCFVJC6mhJ+LLCpRqBIQysr+61V8NbbnxQuZhhRJnFxj4rJubdGJzpw5PIpydEqOYotZgFai81f3jiC99BuW3Ny7xP5T3Natqom8QjUlw0DjKi20j5hDxt0ViRywK/U9ayaKcOQBRt9aGt3rP/Pb9ASnCFjohxZQqnlcjqGAKatXwVFuP+kNX46J9ePMpyyH275RvIzW8Dplh9YcxE47j8bKdSI0ap2kJT3c8yjankIo9Vv0pjY/zXRL9JJtcPeTegAJRKwgbssccaBmp3nq7/nVxkk=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: subgraph-dufour
+      namespace: staging
+

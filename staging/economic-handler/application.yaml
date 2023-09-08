@@ -41,7 +41,7 @@ spec:
               - secretRef:
                   name: hopr-5
               - secretRef:
-                  name: subgraph
+                  name: subgraph-rotsee
               - secretRef:
                   name: rpch
             extraVolumeMounts:

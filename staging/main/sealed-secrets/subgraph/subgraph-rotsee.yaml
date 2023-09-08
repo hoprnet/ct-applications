@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: subgraph-rotsee
+  namespace: staging
+spec:
+  encryptedData:
+    SUBGRAPH_URL: AgBV8nix8KjojjDrjRVyuaFgw/hniemsB4bqMUwtEZ4n07F3V4HeVKNkfbE0ZII9M2lZoQp/uYt8a01FEdAnL8l48PPalzRjrJIboFhNF/H3eHYoSFzmQMGsceV/Tv3gdSRw1ktFR/qba08eP0XGwwLDUmB1L6BM09urog/htvfi2ZCUhygzxi5lLwJNTlgh8jz5kAzIVXGYRnVPqptwm8JfhD87uJw7AtpHzxZfXVzC4Ei6PNoXUN7o077HsELMNtep0mdmXDbgoq7MjTnLbgD8Dp59L+eT1mRyo5qb+1KkLboRpRyO+vYggiFb2JqN1nc+4Psk9TKhtfWRwY1obrqQcZWYPH5i/jRTNMENAX7jEgPV8B0h11zPvRMG8eJh35FR4ghhmVxi3kkqSjF97iokyM5CWiIL9gyt2EpdR9yuai/wTi7t3IdzjTHomHBnJDFvEGm3hQ0DY08gekj/sYL152ZsMP+1+fFptDgMiEgP1lXwmBnEfLpfv548kZh9sGumVHZvoP8zFI7kD2Zxdhk62Dl7UIISSQtlzaoGhwEZfdDAfyRXqRuUnJkwvwgY0wQ6pUVhurt/ZMhMUiDS9GKnYRCru7xbsWCl6W9lCMU1YSm/Jx2bGjfW7ArGAnBni1Fk1ntRXJvFtSxlIY6pIiJkkumt3dIREcsIBFMRW29S0FUuBi46Rb2nr2zbP5mgCAdfuIS3cQPjR9D/pAi+PHtO3kVAbatUa0eJzYjqb69XfVYF6N0jAXkmF037R9dEc8GxglNUkcaxNRd9rs5knbEjfWXIFT1XF87PQfUg69v5VJYaCrO5bgaymGFsII4DBWI0H+KcdzTQTSO/KG9LdR60HsGTrRWQhzPuPyg=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: subgraph-rotsee
+      namespace: staging
+
