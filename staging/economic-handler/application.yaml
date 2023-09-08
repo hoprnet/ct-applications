@@ -24,14 +24,14 @@ spec:
               - '-m'
               - economic_handler
             env:
-              MOCK_MODE: '0'
+              MOCK_MODE: "0"
               PGSSLCERT: "/etc/postgres/certs/tls.crt"
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
               TASK_NAME: send_1_hop_message
               PROJECT_NAME: ct-app
-              MIN_DATABASE_ENTRIES: 0
+              MIN_DATABASE_ENTRIES: "0"
               PARAMETER_FILE: "parameters.json"
             envFrom:
               - secretRef:
