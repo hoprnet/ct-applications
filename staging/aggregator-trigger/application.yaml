@@ -15,8 +15,8 @@ spec:
           name: aggregator-trigger
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "282f98e"
-        replicaCount: 0
+          tag: "2b0eef3"
+        replicaCount: 1
         args: 
           - python
           - '-m'
