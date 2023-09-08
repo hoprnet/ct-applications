@@ -15,7 +15,7 @@ spec:
           name: aggregator
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "1e479d4"
+          tag: "282f98e"
         replicaCount: 1
         containerSecurityContext:
           enabled: true
