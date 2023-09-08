@@ -21,7 +21,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feedback-queue
+            celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feedback
         env:
           PROJECT_NAME: ct-app
           PGSSLCERT: "/etc/postgres/certs/tls.crt"
