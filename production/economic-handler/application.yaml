@@ -17,7 +17,7 @@ spec:
               name: economic-handler
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "ca68a7f"
+              tag: "80cb5e3"
             replicaCount: 1
             args: 
               - python
@@ -31,8 +31,8 @@ spec:
               PGSSLMODE: verify-ca
               TASK_NAME: fake_task
               PROJECT_NAME: ct-app
-              MIN_DATABASE_ENTRIES: "0"
-              PARAMETER_FILE: "parameters.json"
+              MIN_DATABASE_ENTRIES: "150"
+              PARAMETER_FILE: "parameters-production.json"
             envFrom:
               - secretRef:
                   name: postgres-credentials
