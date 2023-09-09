@@ -27,6 +27,7 @@ spec:
           LAT_COUNT: 5
           MOCK_MODE: '0'
           MOCK_LATENCY: '1'
+          CHANNEL_INITIAL_BALANCE: "50000000000000000000"
         envFrom:
           - secretRef:
               name: hopr-3
