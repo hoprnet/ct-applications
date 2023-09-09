@@ -26,7 +26,7 @@ spec:
           AGG_BALANCE: http://aggregator.production:8080/aggregator/balances
           LAT_COUNT: '10'
           MOCK_MODE: '0'
-          MOCK_LATENCY: '0'
+          MOCK_LATENCY: '1'
           CHANNEL_INITIAL_BALANCE: "50000000000000000000"
         envFrom:
           - secretRef:
