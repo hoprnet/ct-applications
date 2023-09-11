@@ -25,8 +25,8 @@ spec:
           AGG_POST: http://aggregator.staging:8080/aggregator/peers
           AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
           LAT_COUNT: 5
-          MOCK_MODE: '0'
           MOCK_LATENCY: '1'
+          CHANNEL_INITIAL_BALANCE: "1000000000000000000"
         envFrom:
           - secretRef:
               name: hopr-2
