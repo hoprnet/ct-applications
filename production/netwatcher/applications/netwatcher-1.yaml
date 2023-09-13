@@ -30,7 +30,7 @@ spec:
           CHANNEL_INITIAL_BALANCE: "50000000000000000000"
         envFrom:
           - secretRef:
-              name: hopr-1
+              name: hoprd-1
   destination:
     server: https://kubernetes.default.svc
     namespace: production
