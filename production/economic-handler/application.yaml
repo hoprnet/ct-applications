@@ -17,21 +17,20 @@ spec:
               name: economic-handler
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "7ae113e"
+              tag: "924d6ad"
             replicaCount: 1
             args: 
               - python
               - '-m'
               - economic_handler
             env:
-              MOCK_MODE: '0'
               PGSSLCERT: "/etc/postgres/certs/tls.crt"
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
               TASK_NAME: send_1_hop_message
               PROJECT_NAME: ct-app
-              MIN_DATABASE_ENTRIES: "150"
+              MIN_ELIGIBLE_PEERS: "50"
               PARAMETER_FILE: "parameters-production.json"
             envFrom:
               - secretRef:
