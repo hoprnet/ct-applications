@@ -1,5 +1,25 @@
 # ct-applications
 
+
+## Hoprd Nodes
+
+### Create Sealed secret
+
+
+```shell
+#!/usr/bin/env bash
+
+export ENVIRONMENT_NAME=staging #TODO - change to the name of your respective environment
+export NODE_NAME=hoprd-1
+export NODE_IP=
+export NODE_API_TOKEN=
+
+kubectl create secret generic ${NODE_NAME} --namespace ${ENVIRONMENT_NAME} --dry-run=client --from-literal=API_HOST=${NODE_IP} --from-literal=API_KEY=${NODE_API_TOKEN} -o yaml | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets --format yaml > ${ENVIRONMENT_NAME}/main/sealed-secrets/hoprd/${NODE_NAME}.yaml
+
+
+```
+
+
 ## Postgres
 
 ### Create Sealed secret
