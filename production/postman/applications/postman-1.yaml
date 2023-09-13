@@ -15,7 +15,7 @@ spec:
           name: postman-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "7ae113e"
+          tag: "5853c73"
         replicaCount: 1
         args:
           - /bin/sh
@@ -26,7 +26,7 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          TIMEOUT: "300"
+          TIMEOUT: "10"
         envFrom:
           - secretRef:
               name: rabbitmq-production
