@@ -38,7 +38,7 @@ spec:
               - secretRef:
                   name: rabbitmq-staging
               - secretRef:
-                  name: hopr-5
+                  name: hoprd-5
               - secretRef:
                   name: subgraph-rotsee
               - secretRef:

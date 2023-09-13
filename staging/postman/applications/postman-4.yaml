@@ -31,7 +31,7 @@ spec:
           - secretRef:
               name: rabbitmq-staging
           - secretRef:
-              name: hopr-4
+              name: hoprd-4
         service:
           type: ClusterIP
           ports:
