@@ -38,7 +38,7 @@ spec:
               - secretRef:
                   name: rabbitmq-production
               - secretRef:
-                  name: hoprd-5
+                  name: hopr-5
               - secretRef:
                   name: subgraph-dufour
               - secretRef:
