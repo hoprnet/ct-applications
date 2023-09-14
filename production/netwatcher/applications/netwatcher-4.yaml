@@ -15,7 +15,7 @@ spec:
           name: netwatcher-4
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "5853c73"
+          tag: "64c978b"
         replicaCount: 1
         args:
           - python
@@ -28,6 +28,7 @@ spec:
           MOCK_MODE: '0'
           MOCK_LATENCY: '1'
           CHANNEL_INITIAL_BALANCE: "50000000000000000000"
+          MINIMUM_BALANCE_IN_CHANNEL: "5"
         envFrom:
           - secretRef:
               name: hopr-4
