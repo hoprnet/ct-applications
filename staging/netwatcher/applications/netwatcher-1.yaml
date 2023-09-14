@@ -15,7 +15,7 @@ spec:
           name: netwatcher-1
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "36696d3"
+          tag: "3a91000"
         replicaCount: 1
         args:
           - python
@@ -26,7 +26,8 @@ spec:
           AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
           LAT_COUNT: 5
           MOCK_LATENCY: '1'
-          CHANNEL_INITIAL_BALANCE: "1000000000000000000"
+          CHANNEL_INITIAL_BALANCE: "200000000000000000"
+          MINIMUM_BALANCE_IN_CHANNEL: "0.15"
         envFrom:
           - secretRef:
               name: hoprd-1
