@@ -31,7 +31,7 @@ spec:
           - secretRef:
               name: rabbitmq-production
           - secretRef:
-              name: hoprd-3
+              name: hopr-3
         service:
           type: ClusterIP
           ports:
