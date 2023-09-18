@@ -31,7 +31,7 @@ spec:
           MINIMUM_BALANCE_IN_CHANNEL: "5"
         envFrom:
           - secretRef:
-              name: hopr-2
+              name: hoprd-2
   destination:
     server: https://kubernetes.default.svc
     namespace: production
