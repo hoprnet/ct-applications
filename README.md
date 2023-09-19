@@ -13,7 +13,7 @@ export ENVIRONMENT_NAME=staging #TODO - change to the name of your respective en
 export NODE_API_TOKEN=
 for i in {1..5}; do
     node_name="hoprd-$i"
-    node_ip=$(gcloud compute instances describe --zone europe-west4-a ctdapp-staging-$i --format=json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP' | tr -d '\n')
+    node_ip=$(gcloud compute instances describe --zone europe-west4-a ctdapp-${ENVIRONMENT_NAME}-$i --format=json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP' | tr -d '\n')
     node_host="http://${node_ip}:3001"
     kubectl create secret generic ${node_name} --namespace ${ENVIRONMENT_NAME} --dry-run=client --from-literal=API_HOST=${node_host} --from-literal=API_KEY=${NODE_API_TOKEN} -o yaml | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets --format yaml > ${ENVIRONMENT_NAME}/main/sealed-secrets/hoprd/${node_name}.yaml
 done
