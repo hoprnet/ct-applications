@@ -32,6 +32,7 @@ spec:
               TASK_NAME: fake_task
               PROJECT_NAME: ct-app
               MIN_DATABASE_ENTRIES: "0"
+              MIN_ELIGIBLE_PEERS: "1"
               PARAMETER_FILE: "parameters.json"
             envFrom:
               - secretRef:
