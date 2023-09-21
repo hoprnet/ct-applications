@@ -29,7 +29,7 @@ spec:
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
-              TASK_NAME: fake_task
+              TASK_NAME: send_1_hop_message
               PROJECT_NAME: ct-app
               MIN_DATABASE_ENTRIES: "0"
               MIN_ELIGIBLE_PEERS: "1"
