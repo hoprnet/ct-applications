@@ -15,7 +15,7 @@ spec:
           name: netwatcher-2
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "64c978b"
+          tag: "a80ea94"
         replicaCount: 1
         args:
           - python
@@ -25,7 +25,6 @@ spec:
           AGG_POST: http://aggregator.production:8080/aggregator/peers
           AGG_BALANCE: http://aggregator.production:8080/aggregator/balances
           LAT_COUNT: '20'
-          MOCK_MODE: '0'
           MOCK_LATENCY: '1'
           CHANNEL_INITIAL_BALANCE: "50000000000000000000"
           MINIMUM_BALANCE_IN_CHANNEL: "5"
