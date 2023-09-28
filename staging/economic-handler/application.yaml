@@ -31,7 +31,6 @@ spec:
               PGSSLMODE: verify-ca
               TASK_NAME: send_1_hop_message
               PROJECT_NAME: ct-app
-              MIN_DATABASE_ENTRIES: "0"
               MIN_ELIGIBLE_PEERS: "1"
               PARAMETER_FILE: "parameters.json"
             envFrom:
