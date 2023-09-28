@@ -17,7 +17,7 @@ spec:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "e60716f"
           pullPolicy: Always
-        replicaCount: 1
+        replicaCount: 0
         args:
           - /bin/sh
           - -c
@@ -27,7 +27,7 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          TIMEOUT: "300"
+          MAXATTEMPTS: "10"
           MESSAGE_DELIVERY_TIMEOUT: "15"
           BATCH_SIZE: "50"
         envFrom:
