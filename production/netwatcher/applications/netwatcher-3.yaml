@@ -26,8 +26,8 @@ spec:
           AGG_BALANCE: http://aggregator.production:8080/aggregator/balances
           LAT_COUNT: '20'
           MOCK_LATENCY: '1'
-          CHANNEL_INITIAL_BALANCE: "50000000000000000000"
-          MINIMUM_BALANCE_IN_CHANNEL: "5"
+          CHANNEL_INITIAL_BALANCE: "110000000000000000000"
+          MINIMUM_BALANCE_IN_CHANNEL: "25"
         envFrom:
           - secretRef:
               name: hoprd-3
