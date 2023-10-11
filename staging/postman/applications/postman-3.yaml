@@ -15,7 +15,7 @@ spec:
           name: postman-3
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "e60716f"
+          tag: "8aa424a"
           pullPolicy: Always
         replicaCount: 0
         args:
@@ -28,7 +28,8 @@ spec:
         env:
           PROJECT_NAME: ct-app
           MAXATTEMPTS: "10"
-          MESSAGE_DELIVERY_TIMEOUT: "15"
+          MESSAGE_DELIVERY_TIMEOUT: "15.0"
+          DELAY_BETWEEN_TWO_MESSAGES: "0.75"
           BATCH_SIZE: "50"
         envFrom:
           - secretRef:
