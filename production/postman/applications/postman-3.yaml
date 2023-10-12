@@ -26,9 +26,9 @@ spec:
             celery -A postman.postman_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q $node_address
         env:
           PROJECT_NAME: ct-app
-          MAXATTEMPTS: "10"
+          MAXATTEMPTS: "4"
           MESSAGE_DELIVERY_TIMEOUT: "15.0"
-          DELAY_BETWEEN_TWO_MESSAGES: "0.75"
+          DELAY_BETWEEN_TWO_MESSAGES: "0.5"
           BATCH_SIZE: "50"
         envFrom:
           - secretRef:
