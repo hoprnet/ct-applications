@@ -15,7 +15,7 @@ spec:
           name: netwatcher-2
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "0d886e7"
+          tag: "1e373a7"
           pullPolicy: Always
         replicaCount: 1
         args:
