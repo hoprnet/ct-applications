@@ -17,7 +17,7 @@ spec:
               name: economic-handler
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "8aa424a"
+              tag: "1e373a7"
             replicaCount: 1
             args: 
               - python
@@ -32,6 +32,7 @@ spec:
               PROJECT_NAME: ct-app
               MIN_ELIGIBLE_PEERS: "50"
               PARAMETER_FILE: "parameters-production.json"
+              GCP_OUTPUT_FOLDER: "expected_rewards"
             envFrom:
               - secretRef:
                   name: postgres-credentials
