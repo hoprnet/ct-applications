@@ -19,7 +19,7 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "2a30b98"
               pullPolicy: Always
-            replicaCount: 0
+            replicaCount: 1
             args: 
               - python
               - '-m'
@@ -29,7 +29,7 @@ spec:
               PGSSLKEY: "/etc/postgres/certs/tls.key"
               PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
               PGSSLMODE: verify-ca
-              TASK_NAME: send_1_hop_message
+              TASK_NAME: fake_task
               PROJECT_NAME: ct-app
               MIN_ELIGIBLE_PEERS: "1"
               PARAMETER_FILE: "parameters.json"
