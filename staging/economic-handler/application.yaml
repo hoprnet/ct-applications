@@ -17,7 +17,7 @@ spec:
               name: economic-handler
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "b90fbd6"
+              tag: "1e28203"
               pullPolicy: Always
             replicaCount: 0
             args: 
