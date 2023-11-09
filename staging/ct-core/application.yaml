@@ -26,8 +26,15 @@ spec:
           - '-m'
           - core
         env:
-          FLAG_CORE_HEALTHCHECK: 10
-          FLAG_NODE_HEALTHCHECK: 10
+          FLAG_CORE_HEALTHCHECK: 60
+          FLAG_CORE_AGGREGATE_PEERS: 60
+          FLAG_CORE_GET_TOPOLOGY_DATA: 60
+
+          FLAG_NODE_HEALTHCHECK: 30
+          FLAG_NODE_RETRIEVE_PEERS: 30
+          FLAG_NODE_RETRIEVE_OUTGOING_CHANNELS: 60
+          FLAG_NODE_RETRIEVE_INCOMING_CHANNELS: 60
+          FLAG_NODE_RETRIEVE_BALANCE: 60
 
           PARAM_MIN_ELIGIBLE_PEERS: 5
           PARAM_SUBGRAPH_PAGINATION_SIZE: 1000
@@ -35,6 +42,10 @@ spec:
           PARAM_GCP_FILE_PREFIX: expected_reward
           PARAM_GCP_FOLDER: refactored_app
           PARAM_GCP_BUCKET: ct-platform-ct
+
+          PARAM_ECONOMIC_MODEL_FILENAME: parameters-production.json
+          PARAM_CHANNEL_MIN_BALANCE: 1
+          PARAM_CHANNEL_FUNDING_AMOUNT: 10
         envFrom:
         - secretRef:
             name: hoprd-nodes
