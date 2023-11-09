@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: netwatcher-4
+  name: ct-core
   namespace: staging
 spec:
   project: staging
@@ -12,26 +12,36 @@ spec:
     helm:
       values: |
         app:
-          name: netwatcher-4
+          name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "1e28203"
+          tag: "4cd6843"
           pullPolicy: Always
-        replicaCount: 0
+        replicaCount: 1
+        containerSecurityContext:
+          enabled: true
+          runAsUser: 1001
         args:
           - python
           - '-m'
-          - netwatcher
+          - core
         env:
-          AGG_POST: http://aggregator.staging:8080/aggregator/peers
-          AGG_BALANCE: http://aggregator.staging:8080/aggregator/balances
-          LAT_COUNT: 5
-          MOCK_LATENCY: '1'
-          CHANNEL_INITIAL_BALANCE: "200000000000000000"
-          MINIMUM_BALANCE_IN_CHANNEL: "0.15"
+          FLAG_CORE_HEALTHCHECK: 10
+          FLAG_NODE_HEALTHCHECK: 10
+
+          PARAM_MIN_ELIGIBLE_PEERS: 5
+          PARAM_SUBGRAPH_PAGINATION_SIZE: 1000
+
+          PARAM_GCP_FILE_PREFIX: expected_reward
+          PARAM_GCP_FOLDER: refactored_app
+          PARAM_GCP_BUCKET: ct-platform-ct
         envFrom:
-          - secretRef:
-              name: hoprd-4
+        - secretRef:
+            name: hoprd-nodes
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
   destination:
     server: https://kubernetes.default.svc
     namespace: staging
