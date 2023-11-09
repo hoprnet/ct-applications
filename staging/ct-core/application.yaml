@@ -27,8 +27,11 @@ spec:
           - core
         env:
           FLAG_CORE_HEALTHCHECK: 60
+          FLAG_CORE_CHECK_SUBGRAPH_URLS: 120
           FLAG_CORE_AGGREGATE_PEERS: 60
           FLAG_CORE_GET_TOPOLOGY_DATA: 60
+          FLAG_CORE_GET_SUBGRAPH_DATA: 60
+          FLAG_CORE_APPLY_ECONOMIC_MODEL: 120
 
           FLAG_NODE_HEALTHCHECK: 30
           FLAG_NODE_RETRIEVE_PEERS: 30
@@ -49,6 +52,8 @@ spec:
         envFrom:
         - secretRef:
             name: hoprd-nodes
+        - secretRef:
+            name: subgraph
         service:
           type: ClusterIP
           ports:
