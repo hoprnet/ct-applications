@@ -15,7 +15,7 @@ spec:
           name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "4cd6843"
+          tag: "0e2aab6"
           pullPolicy: Always
         replicaCount: 0
         containerSecurityContext:
