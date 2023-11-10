@@ -15,7 +15,7 @@ spec:
           name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "f2b32f5"
+          tag: "4b5dc6e"
           pullPolicy: Always
         replicaCount: 1
         containerSecurityContext:
@@ -38,6 +38,7 @@ spec:
           FLAG_NODE_RETRIEVE_OUTGOING_CHANNELS: 60
           FLAG_NODE_RETRIEVE_INCOMING_CHANNELS: 60
           FLAG_NODE_RETRIEVE_BALANCES: 60
+          FLAG_NODE_OPEN_CHANNELS: 120
 
           PARAM_MIN_ELIGIBLE_PEERS: 5
           PARAM_SUBGRAPH_PAGINATION_SIZE: 1000
@@ -47,8 +48,8 @@ spec:
           PARAM_GCP_BUCKET: ct-platform-ct
 
           PARAM_ECONOMIC_MODEL_FILENAME: parameters-production.json
-          PARAM_CHANNEL_MIN_BALANCE: 1
-          PARAM_CHANNEL_FUNDING_AMOUNT: 10
+          PARAM_CHANNEL_MIN_BALANCE: 0.05
+          PARAM_CHANNEL_FUNDING_AMOUNT: 0.2
         envFrom:
         - secretRef:
             name: hoprd-nodes
