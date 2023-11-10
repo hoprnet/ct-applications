@@ -15,7 +15,7 @@ spec:
           name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "4b5dc6e"
+          tag: "00734c9"
           pullPolicy: Always
         replicaCount: 1
         containerSecurityContext:
@@ -39,6 +39,9 @@ spec:
           FLAG_NODE_RETRIEVE_INCOMING_CHANNELS: 60
           FLAG_NODE_RETRIEVE_BALANCES: 60
           FLAG_NODE_OPEN_CHANNELS: 120
+          FLAG_NODE_CLOSE_OLD_CHANNELS: 120
+          FLAG_NODE_CLOSE_PENDING_CHANNELS: 120
+          FLAG_NODE_FUND_CHANNELS: 120
 
           PARAM_MIN_ELIGIBLE_PEERS: 5
           PARAM_SUBGRAPH_PAGINATION_SIZE: 1000
