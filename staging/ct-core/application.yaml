@@ -50,7 +50,7 @@ spec:
           PARAM_GCP_FOLDER: refactored_app
           PARAM_GCP_BUCKET: ct-platform-ct
 
-          PARAM_ECONOMIC_MODEL_FILENAME: parameters.json
+          PARAM_ECONOMIC_MODEL_FILENAME: parameters-staging.json
           PARAM_CHANNEL_MIN_BALANCE: 0.05
           PARAM_CHANNEL_FUNDING_AMOUNT: 0.2
           PARAM_CHANNEL_MAX_AGE_SECONDS: 14400
