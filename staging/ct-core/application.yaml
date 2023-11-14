@@ -59,7 +59,7 @@ spec:
           RABBITMQ_PROJECT_NAME: ct-app
 
           SUBGRAPH_PAGINATION_SIZE: 1000
-          SUBGRAPH_QUERY="query SafeNodeBalance(\$first: Int, \$skip: Int) { safes(first: \$first, skip: \$skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
+          SUBGRAPH_QUERY: "query SafeNodeBalance(\$first: Int, \$skip: Int) { safes(first: \$first, skip: \$skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
 
         envFrom:
         - secretRef:
