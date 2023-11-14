@@ -53,7 +53,7 @@ spec:
 
           CHANNEL_MIN_BALANCE: 0.05
           CHANNEL_FUNDING_AMOUNT: 0.2
-          CHANNEL_MAX_AGE_SECONDS: 14400
+          CHANNEL_MAX_AGE_SECONDS: 86400
 
           RABBITMQ_TASK_NAME: fake_task
           RABBITMQ_PROJECT_NAME: ct-app
