@@ -15,7 +15,7 @@ spec:
           name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "afcb6a1"
+          tag: "f3cbed2"
           pullPolicy: Always
         replicaCount: 1
         containerSecurityContext:
@@ -43,17 +43,24 @@ spec:
           FLAG_NODE_CLOSE_PENDING_CHANNELS: 300
           FLAG_NODE_FUND_CHANNELS: 300
 
-          PARAM_MIN_ELIGIBLE_PEERS: 5
-          PARAM_SUBGRAPH_PAGINATION_SIZE: 1000
+          DISTRIBUTION_MIN_ELIGIBLE_PEERS: 5
 
-          PARAM_GCP_FILE_PREFIX: expected_reward
-          PARAM_GCP_FOLDER: refactored_app
-          PARAM_GCP_BUCKET: ct-platform-ct
+          GCP_FILE_PREFIX: expected_reward
+          GCP_FOLDER: refactored_app
+          GCP_BUCKET: ct-platform-ct
 
-          PARAM_ECONOMIC_MODEL_FILENAME: parameters-staging.json
-          PARAM_CHANNEL_MIN_BALANCE: 0.05
-          PARAM_CHANNEL_FUNDING_AMOUNT: 0.2
-          PARAM_CHANNEL_MAX_AGE_SECONDS: 14400
+          ECONOMIC_MODEL_FILENAME: parameters-staging.json
+
+          CHANNEL_MIN_BALANCE: 0.05
+          CHANNEL_FUNDING_AMOUNT: 0.2
+          CHANNEL_MAX_AGE_SECONDS: 14400
+
+          RABBITMQ_TASK_NAME="fake_task"
+          RABBITMQ_PROJECT_NAME="ct-app"
+
+          SUBGRAPH_PAGINATION_SIZE: 1000
+          SUBGRAPH_QUERY="query SafeNodeBalance(\$first: Int, \$skip: Int) { safes(first: \$first, skip: \$skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
+
         envFrom:
         - secretRef:
             name: hoprd-nodes
