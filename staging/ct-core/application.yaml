@@ -62,7 +62,7 @@ spec:
 
           SUBGRAPH_PAGINATION_SIZE: 1000
           SUBGRAPH_SAFES_BALANCE_QUERY: "query SafeNodeBalance($first: Int, $skip: Int) { safes(first: $first, skip: $skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
-          SUBGRAPH_WXHOPR_TXS_QUERY: "{transactions(where: {from: \$from, to: \$to}) {from to amount}}"
+          SUBGRAPH_WXHOPR_TXS_QUERY: "{transactions(where: {from: $from, to: $to}) {from to amount}}"
           SUBGRAPH_FROM_ADDRESS: 0xd9a00176cf49dfb9ca3ef61805a2850f45cb1d05
 
         envFrom:
