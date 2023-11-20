@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman-1
+  name: postman
   namespace: production
 spec:
   project: production
@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         app:
-          name: postman-1
+          name: postman
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "09e24d1"
