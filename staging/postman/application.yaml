@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postman-1
+  namespace: production
+spec:
+  project: production
+  source:
+    repoURL: https://dysnix.github.io/charts
+    targetRevision: 0.99.16
+    chart: app
+    helm:
+      values: |
+        app:
+          name: postman-1
+        image:
+          repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
+          tag: "09e24d1"
+        replicaCount: 1
+        args:
+          - /bin/sh
+          - -c
+          - |
+            celery -A postman.postman_tasks.app worker --concurrency=4 -n worker@%h -l info -E -Q "send_messages"
+        env:
+          PARAM_BATCH_SIZE: 100
+          PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.2
+          PARAM_MESSAGE_DELIVERY_TIMEOUT: 15
+          PARAM_MAX_ATTEMPTS: 6
+
+          RABBITMQ_PROJECT_NAME: ct-app
+        envFrom:
+        - secretRef:
+            name: hoprd-nodes
+          - secretRef:
+              name: rabbitmq-production
+        service:
+          type: ClusterIP
+          ports:
+            http: 8080
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
