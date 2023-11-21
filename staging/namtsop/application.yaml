@@ -25,8 +25,8 @@ spec:
         env:
           RABBITMQ_PROJECT_NAME: ct-app
         envFrom:
-          - secretRef:
-              name: rabbitmq-staging
+        - secretRef:
+            name: rabbitmq-staging
         service:
           type: ClusterIP
           ports:

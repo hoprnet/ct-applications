@@ -32,8 +32,8 @@ spec:
         envFrom:
         - secretRef:
             name: hoprd-nodes
-          - secretRef:
-              name: rabbitmq-staging
+        - secretRef:
+            name: rabbitmq-staging
         service:
           type: ClusterIP
           ports:
