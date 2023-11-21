@@ -15,9 +15,9 @@ spec:
           name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "09e24d1"
+          tag: "4c923d0"
           pullPolicy: Always
-        replicaCount: 0
+        replicaCount: 1
         containerSecurityContext:
           enabled: true
           runAsUser: 1001
@@ -61,8 +61,8 @@ spec:
           RABBITMQ_PROJECT_NAME: ct-app
 
           SUBGRAPH_PAGINATION_SIZE: 1000
-          SUBGRAPH_SAFES_BALANCE_QUERY: "query SafeNodeBalance($first: Int, $skip: Int) { safes(first: $first, skip: $skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
-          SUBGRAPH_WXHOPR_TXS_QUERY: "{transactions(where: {from: $from, to: $to}) {from to amount}}"
+          SUBGRAPH_SAFES_BALANCE_QUERY: "{ safes(first: $first, skip: $skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance }}}}}"
+          SUBGRAPH_WXHOPR_TXS_QUERY: "{ transactions(where: { from: $from, to: $to }) { from to amount }}"
           SUBGRAPH_FROM_ADDRESS: 0xd9a00176cf49dfb9ca3ef61805a2850f45cb1d05
 
         envFrom:
@@ -70,6 +70,8 @@ spec:
             name: hoprd-nodes
         - secretRef:
             name: subgraph
+        - secretRef:
+            name: rabbitmq-staging
         service:
           type: ClusterIP
           ports:
