@@ -15,7 +15,7 @@ spec:
           name: ct-core
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "v2.0.0"
+          tag: "v2.0.1"
           pullPolicy: Always
         replicaCount: 1
         containerSecurityContext:
@@ -67,12 +67,15 @@ spec:
           SUBGRAPH_FROM_ADDRESS: 0xd9a00176cf49dfb9ca3ef61805a2850f45cb1d05
 
         envFrom:
-        - secretRef:
+          - secretRef:
             name: hoprd-nodes
-        - secretRef:
+          - secretRef:
             name: subgraph
-        - secretRef:
+          - secretRef:
             name: rabbitmq-production
+        serviceAccount:
+          annotations:
+            iam.gke.io/gcp-service-account: ARGOCD_ENV_CLUSTER_NAME-ct-production@ARGOCD_ENV_GOOGLE_PROJECT.iam.gserviceaccount.com
         service:
           type: ClusterIP
           ports:
