@@ -63,7 +63,7 @@ spec:
             http: 8080
   destination:
     server: https://kubernetes.default.svc
-    namespace: staging
+    namespace: production
   syncPolicy:
     automated:
       prune: true
