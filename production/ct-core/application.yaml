@@ -19,7 +19,7 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "v2.0.1"
               pullPolicy: Always
-            replicaCount: 1
+            replicaCount: 0
             containerSecurityContext:
               enabled: true
               runAsUser: 1001
@@ -67,14 +67,13 @@ spec:
               SUBGRAPH_SAFES_BALANCE_QUERY: "{ safes(first: $first, skip: $skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance }}}}}"
               SUBGRAPH_WXHOPR_TXS_QUERY: "{ transactions(where: { from: $from, to: $to }) { from to amount }}"
               SUBGRAPH_FROM_ADDRESS: 0xd9a00176cf49dfb9ca3ef61805a2850f45cb1d05
-
             envFrom:
               - secretRef:
-                name: hoprd-nodes
+                  name: hoprd-nodes
               - secretRef:
-                name: subgraph
+                  name: subgraph
               - secretRef:
-                name: rabbitmq-production
+                  name: rabbitmq-production
             serviceAccount:
               annotations:
                 iam.gke.io/gcp-service-account: ARGOCD_ENV_CLUSTER_NAME-ct-production@ARGOCD_ENV_GOOGLE_PROJECT.iam.gserviceaccount.com
