@@ -15,7 +15,7 @@ spec:
           name: namtsop
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "v2.0.1"
+          tag: "v2.0.2"
         replicaCount: 1
         args:
           - /bin/sh
