@@ -51,7 +51,7 @@ spec:
               DISTRIBUTION_MIN_ELIGIBLE_PEERS: 100
 
               GCP_FILE_PREFIX: expected_reward
-              GCP_FOLDER: expected_reward
+              GCP_FOLDER: expected_rewards
               GCP_BUCKET: ct-platform-ct
 
               ECONOMIC_MODEL_FILENAME: parameters-production.json
