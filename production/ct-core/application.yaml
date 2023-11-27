@@ -17,7 +17,7 @@ spec:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "v2.0.2"
           pullPolicy: Always
-        replicaCount: 0
+        replicaCount: 1
         containerSecurityContext:
           enabled: true
           runAsUser: 1001
