@@ -56,7 +56,7 @@ spec:
 
               ECONOMIC_MODEL_FILENAME: parameters-production.json
               ECONOMIC_MODEL_MIN_SAFE_ALLOWANCE: 0
-              
+
               CHANNEL_MIN_BALANCE: 15
               CHANNEL_FUNDING_AMOUNT: 50
               CHANNEL_MAX_AGE_SECONDS: 172800
@@ -65,7 +65,7 @@ spec:
               RABBITMQ_PROJECT_NAME: ct-app
 
               SUBGRAPH_PAGINATION_SIZE: 1000
-              SUBGRAPH_SAFES_BALANCE_QUERY: "{ safes(first: valfirst, skip: valskip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
+              SUBGRAPH_SAFES_BALANCE_QUERY: "{ safes(first: valfirst, skip: valskip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } allowance { wxHoprAllowance } } } } }"
               SUBGRAPH_WXHOPR_TXS_QUERY: "{ transactions(where: { from: valfrom, to: valto }) { from to amount }} "
               SUBGRAPH_FROM_ADDRESS: 0xd9a00176cf49dfb9ca3ef61805a2850f45cb1d05
             envFrom:
