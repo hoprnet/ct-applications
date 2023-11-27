@@ -17,7 +17,7 @@ spec:
               name: ct-core
             image:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-              tag: "4939c89"
+              tag: "v2.0.3"
               pullPolicy: Always
             replicaCount: 1
             containerSecurityContext:
@@ -55,7 +55,8 @@ spec:
               GCP_BUCKET: ct-platform-ct
 
               ECONOMIC_MODEL_FILENAME: parameters-production.json
-
+              ECONOMIC_MODEL_MIN_SAFE_ALLOWANCE: 0
+              
               CHANNEL_MIN_BALANCE: 15
               CHANNEL_FUNDING_AMOUNT: 50
               CHANNEL_MAX_AGE_SECONDS: 172800
@@ -64,8 +65,8 @@ spec:
               RABBITMQ_PROJECT_NAME: ct-app
 
               SUBGRAPH_PAGINATION_SIZE: 1000
-              SUBGRAPH_SAFES_BALANCE_QUERY: "{ safes(first: $first, skip: $skip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
-              SUBGRAPH_WXHOPR_TXS_QUERY: "{ transactions(where: { from: $from, to: $to }) { from to amount }} "
+              SUBGRAPH_SAFES_BALANCE_QUERY: "{ safes(first: valfirst, skip: valskip) { registeredNodesInNetworkRegistry { node { id } safe { id balance { wxHoprBalance } } } } }"
+              SUBGRAPH_WXHOPR_TXS_QUERY: "{ transactions(where: { from: valfrom, to: valto }) { from to amount }} "
               SUBGRAPH_FROM_ADDRESS: 0xd9a00176cf49dfb9ca3ef61805a2850f45cb1d05
             envFrom:
               - secretRef:
