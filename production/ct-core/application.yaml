@@ -11,7 +11,7 @@ spec:
     chart: app
     plugin:
       env:
-        - name: HEML_VALUES
+        - name: HELM_VALUES
           value: |
             app:
               name: ct-core
