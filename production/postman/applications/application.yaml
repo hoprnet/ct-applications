@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         app:
-          name: production
+          name: postman
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
           tag: "v2.0.2"
