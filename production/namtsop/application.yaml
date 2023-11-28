@@ -21,7 +21,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            celery -A namtsop.namtsop_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q "feedback"
+            celery -A namtsop.namtsop_tasks.app worker --concurrency=4 -n worker@%h -l info -E -Q "feedback"
         env:
           RABBITMQ_PROJECT_NAME: ct-app
           PGSSLCERT: "/etc/postgres/certs/tls.crt"
