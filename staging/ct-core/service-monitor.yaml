@@ -1,13 +1,13 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: aggregator
-  namespace: production
+  name: ct-core
+  namespace: staging
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/instance: aggregator
+      app.kubernetes.io/instance: ct-core
   endpoints:
     - port: "http"
       interval: 30s
-      path: /aggregator/metrics
+      path: /metrics

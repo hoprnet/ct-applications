@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggregator
+  name: namtsop
   namespace: staging
 spec:
   project: staging
@@ -12,29 +12,22 @@ spec:
     helm:
       values: |
         app:
-          name: aggregator
+          name: namtsop
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "1e28203"
-          pullPolicy: Always
+          tag: "v2.0.0"
         replicaCount: 1
-        containerSecurityContext:
-          enabled: true
-          runAsUser: 1001
         args:
-          - python
-          - '-m'
-          - aggregator
+          - /bin/sh
+          - -c
+          - |
+            celery -A namtsop.namtsop_tasks.app worker --concurrency=1 -n worker@%h -l info -E -Q "feedback"
         env:
-          API_HOST: 0.0.0.0
-          API_PORT: 8080
+          RABBITMQ_PROJECT_NAME: ct-app
           PGSSLCERT: "/etc/postgres/certs/tls.crt"
           PGSSLKEY: "/etc/postgres/certs/tls.key"
           PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
           PGSSLMODE: verify-ca
-        envFrom:
-          - secretRef:
-              name: postgres-credentials
         extraVolumeMounts:
           - name: postgres-certs
             mountPath: "/etc/postgres/certs"
@@ -59,6 +52,11 @@ spec:
                 mountPath: "/tmp/certs"
               - name: tmp-postgres-certs
                 mountPath: "/tmp/tmp-certs"
+        envFrom:
+        - secretRef:
+            name: rabbitmq-staging
+        - secretRef:
+            name: postgres-credentials
         service:
           type: ClusterIP
           ports:
@@ -74,4 +72,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
-      

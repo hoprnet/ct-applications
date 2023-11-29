@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aggregator
-  namespace: production
+  name: postman
+  namespace: staging
 spec:
-  project: production
+  project: staging
   source:
     repoURL: https://dysnix.github.io/charts
     targetRevision: 0.99.16
@@ -12,28 +12,27 @@ spec:
     helm:
       values: |
         app:
-          name: aggregator
+          name: staging
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "119d15f"
+          tag: "v2.0.0"
         replicaCount: 1
-        containerSecurityContext:
-          enabled: true
-          runAsUser: 1001
         args:
-          - python
-          - '-m'
-          - aggregator
+          - /bin/sh
+          - -c
+          - |
+            celery -A postman.postman_tasks.app worker -c 4 -n worker@%h -l info -E -Q "send_messages"
         env:
-          API_HOST: 0.0.0.0
-          API_PORT: 8080
+          PARAM_BATCH_SIZE: 100
+          PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.2
+          PARAM_MESSAGE_DELIVERY_TIMEOUT: 15
+          PARAM_MAX_ATTEMPTS: 6
+
+          RABBITMQ_PROJECT_NAME: ct-app
           PGSSLCERT: "/etc/postgres/certs/tls.crt"
           PGSSLKEY: "/etc/postgres/certs/tls.key"
           PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
           PGSSLMODE: verify-ca
-        envFrom:
-          - secretRef:
-              name: postgres-credentials
         extraVolumeMounts:
           - name: postgres-certs
             mountPath: "/etc/postgres/certs"
@@ -58,13 +57,20 @@ spec:
                 mountPath: "/tmp/certs"
               - name: tmp-postgres-certs
                 mountPath: "/tmp/tmp-certs"
+        envFrom:
+        - secretRef:
+            name: hoprd-nodes
+        - secretRef:
+            name: rabbitmq-staging
+        - secretRef:
+            name: postgres-credentials
         service:
           type: ClusterIP
           ports:
             http: 8080
   destination:
     server: https://kubernetes.default.svc
-    namespace: production
+    namespace: staging
   syncPolicy:
     automated:
       prune: true
@@ -73,4 +79,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
-

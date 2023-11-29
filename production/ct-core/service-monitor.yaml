@@ -1,12 +1,12 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: economic-handler
+  name: ct-core
   namespace: production
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/instance: production-economic-handler
+      app.kubernetes.io/instance: production-ct-core
   endpoints:
     - port: "http"
       interval: 30s

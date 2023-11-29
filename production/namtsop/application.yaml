@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postman-feedback
+  name: namtsop
   namespace: production
 spec:
   project: production
@@ -12,18 +12,18 @@ spec:
     helm:
       values: |
         app:
-          name: postman-feedback
+          name: namtsop
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "119d15f"
+          tag: "v2.0.3"
         replicaCount: 1
         args:
           - /bin/sh
           - -c
           - |
-            celery -A postman_feedback.postman_feedback_task.app worker --concurrency=1 -n worker@%h -l info -E -Q feedback
+            celery -A namtsop.namtsop_tasks.app worker --concurrency=4 -n worker@%h -l info -E -Q "feedback"
         env:
-          PROJECT_NAME: ct-app
+          RABBITMQ_PROJECT_NAME: ct-app
           PGSSLCERT: "/etc/postgres/certs/tls.crt"
           PGSSLKEY: "/etc/postgres/certs/tls.key"
           PGSSLROOTCERT: "/etc/postgres/certs/ca.crt"
@@ -53,10 +53,10 @@ spec:
               - name: tmp-postgres-certs
                 mountPath: "/tmp/tmp-certs"
         envFrom:
-          - secretRef:
-              name: postgres-credentials
-          - secretRef:
-              name: rabbitmq-production
+        - secretRef:
+            name: rabbitmq-production
+        - secretRef:
+            name: postgres-credentials
         service:
           type: ClusterIP
           ports:
@@ -72,4 +72,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
-
