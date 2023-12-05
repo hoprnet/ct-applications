@@ -15,7 +15,7 @@ spec:
           name: postman
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "v2.0.3"
+          tag: "v2.1.1"
         replicaCount: 1
         args:
           - /bin/sh
@@ -25,7 +25,7 @@ spec:
         env:
           PARAM_BATCH_SIZE: 100
           PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.3
-          PARAM_MESSAGE_DELIVERY_TIMEOUT: 15
+          PARAM_MESSAGE_DELIVERY_TIMEOUT: 20
           PARAM_MAX_ATTEMPTS: 4
 
           RABBITMQ_PROJECT_NAME: ct-app
