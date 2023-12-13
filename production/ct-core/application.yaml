@@ -29,7 +29,7 @@ spec:
               - core
             env:
               FLAG_CORE_HEALTHCHECK: 60
-              FLAG_CORE_CHECK_SUBGRAPH_URLS: 600
+              FLAG_CORE_CHECK_SUBGRAPH_URLS: 200
               FLAG_CORE_GET_FUNDINGS: 900
               FLAG_CORE_AGGREGATE_PEERS: 300
               FLAG_CORE_GET_TOPOLOGY_DATA: 300
