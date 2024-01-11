@@ -1,0 +1,137 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ct-app
+  namespace: production
+spec:
+  groups:
+    - name: rabbitmq
+      rules:
+        - alert: RabbitMQCriticalLoad
+            annotations:
+              description: >-
+                Triggers when rabbitmq is used more than 90% in the passed 12h
+              summary: RabbitMQ is overused
+            expr: avg_over_time(avg_over_time((rabbitmq_queue_messages >bool 0)[8h:2m])[12h:2m]) * 100 > 90
+            for: 10m
+            labels:
+              severity: critical
+        - alert: RabbitMQHighLoad
+          annotations:
+            description: >-
+              Triggers when rabbitmq is used more than 75% in the passed 12h
+            summary: RabbitMQ is overused
+          expr: avg_over_time(avg_over_time((rabbitmq_queue_messages >bool 0)[8h:2m])[12h:2m]) * 100 > 75
+          for: 10m
+          labels:
+            severity: warning
+    - name: subgraph
+      rules:
+        - alert: SubgraphNoEndpointAvailable
+            annotations:
+              description: >-
+                No subgraph endpoint available (neither decentralized or backup) for 10m
+              summary: No subgraph endpoint
+            expr: sum(subgraph_in_use{namespace="production"}) == -1
+            for: 10m
+            labels:
+              severity: critical
+        - alert: SubgraphOnBackup
+            annotations:
+              description: >-
+                Using backup subgraph endpoint
+              summary: Subgraph using backup
+            expr: sum(subgraph_in_use{namespace="production"}) == 1
+            for: 10m
+            labels:
+              severity: warning
+    - name: nodes-state
+      rules:
+        - alert: DistributionNodesNotAllUp
+            annotations:
+              description: >-
+                Not all nodes handling message distribution are up for more than 10min.
+              summary: Not all nodes up
+            expr: sum(node_health{namespace="production"}) != count(node_health{namespace="production"})
+            for: 10m
+            labels:
+              severity: warning
+        - alert: CoreNodeNotUp
+            annotations:
+              description: >-
+                Core node is not up for more than 10min.
+              summary: Core node not up
+            expr: sum by (job) (core_health{namespace="production"})
+            for: 10m
+            labels:
+              severity: warning
+    - name: nodes-funding
+      rules:
+        - alert: NodeFundingwxHOPRLow
+          annotations:
+            description: >-
+              At least one node is running with less than 5'000wxHOPR in their safes
+            summary: Some nodes are underfunded
+          expr: min(sum by (peer_id) (balance{namespace="production",token="safe_hopr"}) / 1e+18) < 5000
+          for: 10m
+          labels:
+            severity: warning
+
+        - alert: NodeFundingwxHOPRCritical
+          annotations:
+            description: >-
+              At least one node is running with less than 2'500wxHOPR in their safes
+            summary: Some nodes are underfunded
+          expr: min(sum by (peer_id) (balance{namespace="production",token="safe_hopr"}) / 1e+18) < 2500
+          for: 10m
+          labels:
+            severity: critical
+
+        - alert: NodeFundingxDaiLow
+          annotations: 
+            description: >-
+              At least one node is running with less than 0.2xDai
+            summary: Some nodes are underfunded
+          expr: min(sum by (peer_id) (balance{namespace="production",token="native"}) / 1e+18) < 0.2
+          for: 10m
+          labels:
+            severity: warning
+
+        - alert: NodeFundingxDaiCritical
+          annotations:
+            description: >-
+              At least one node is running with less than 0.1xDai
+            summary: Some nodes are underfunded
+          expr: min(sum by (peer_id) (balance{namespace="production",token="native"}) / 1e+18) < 0.1
+          for: 10m
+          labels:
+            severity: critical
+    - name: apr
+      rules:
+        - alert: APRTooLow
+          annotations:
+            description: >-
+              Average APR among community nodes is bellow 10%
+            summary: Low APR
+          expr: avg(apr_per_peer{namespace="production"}) <= 10
+          for: 10m
+          labels:
+            severity: warning
+        - alert: APRTooLowCritical
+          annotations:
+            description: >-
+              Average APR among community nodes is bellow 5%
+            summary: Critically low APR
+          expr: avg(apr_per_peer{namespace="production"}) <= 5
+          for: 10m
+          labels:
+            severity: warning
+        - alert: APRTooHigh
+          annotations:
+            description: >-
+              Average APR among community nodes is above 20% (should never happen)
+            summary: Low APR
+          expr: avg(apr_per_peer{namespace="production"}) >= 20
+          for: 10m
+          labels:
+            severity: critical
