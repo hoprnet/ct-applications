@@ -21,7 +21,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            celery -A postman.postman_tasks.app worker -c 4 -n worker@%h -l info -E -Q "send_messages"
+            celery -A postman.postman_tasks.app worker -c 2 -n worker@%h -l info -E -Q "send_messages"
         env:
           PARAM_BATCH_SIZE: 100
           PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.3
