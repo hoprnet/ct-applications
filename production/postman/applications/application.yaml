@@ -24,8 +24,8 @@ spec:
             celery -A postman.postman_tasks.app worker -c 3 -n worker@%h -l info -E -Q "send_messages"
         env:
           PARAM_BATCH_SIZE: 100
-          PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.3
-          PARAM_MESSAGE_DELIVERY_TIMEOUT: 20
+          PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.2
+          PARAM_MESSAGE_DELIVERY_TIMEOUT: 15
           PARAM_MAX_ATTEMPTS: 4
 
           RABBITMQ_PROJECT_NAME: ct-app
