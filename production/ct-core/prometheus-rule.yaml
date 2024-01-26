@@ -8,14 +8,14 @@ spec:
     - name: rabbitmq
       rules:
         - alert: RabbitMQCriticalLoad
-            annotations:
-              description: >-
-                Triggers when rabbitmq is used more than 97.5% in the passed 12h
-              summary: RabbitMQ is overused
-            expr: avg_over_time(avg_over_time((rabbitmq_queue_messages >bool 0)[8h:2m])[12h:2m]) > 0.975
-            for: 30m
-            labels:
-              severity: critical
+          annotations:
+            description: >-
+              Triggers when rabbitmq is used more than 97.5% in the passed 12h
+            summary: RabbitMQ is overused
+          expr: avg_over_time(avg_over_time((rabbitmq_queue_messages >bool 0)[8h:2m])[12h:2m]) > 0.975
+          for: 30m
+          labels:
+            severity: critical
         - alert: RabbitMQHighLoad
           annotations:
             description: >-
@@ -28,43 +28,43 @@ spec:
     - name: subgraph
       rules:
         - alert: SubgraphNoEndpointAvailable
-            annotations:
-              description: >-
-                No subgraph endpoint available (neither decentralized or backup)
-              summary: No subgraph endpoint
-            expr: sum(subgraph_in_use{namespace="production"}) == -1
-            for: 30m
-            labels:
-              severity: critical
+          annotations:
+            description: >-
+              No subgraph endpoint available (neither decentralized or backup)
+            summary: No subgraph endpoint
+          expr: sum(subgraph_in_use{namespace="production"}) == -1
+          for: 30m
+          labels:
+            severity: critical
         - alert: SubgraphOnBackup
-            annotations:
-              description: >-
-                Using backup subgraph endpoint
-              summary: Subgraph using backup
-            expr: sum(subgraph_in_use{namespace="production"}) == 1
-            for: 60m
-            labels:
-              severity: warning
+          annotations:
+            description: >-
+              Using backup subgraph endpoint
+            summary: Subgraph using backup
+          expr: sum(subgraph_in_use{namespace="production"}) == 1
+          for: 60m
+          labels:
+            severity: warning
     - name: nodes-state
       rules:
         - alert: DistributionNodesNotAllUp
-            annotations:
-              description: >-
-                Not all nodes handling message distribution are up
-              summary: Not all nodes up
-            expr: sum(node_health{namespace="production"}) != count(node_health{namespace="production"})
-            for: 30m
-            labels:
-              severity: warning
+          annotations:
+            description: >-
+              Not all nodes handling message distribution are up
+            summary: Not all nodes up
+          expr: sum(node_health{namespace="production"}) != count(node_health{namespace="production"})
+          for: 30m
+          labels:
+            severity: warning
         - alert: CoreNodeNotUp
-            annotations:
-              description: >-
-                Core node is not up
-              summary: Core node not up
-            expr: sum by (job) (core_health{namespace="production"}) < 1
-            for: 30m
-            labels:
-              severity: warning
+          annotations:
+            description: >-
+              Core node is not up
+            summary: Core node not up
+          expr: sum by (job) (core_health{namespace="production"}) < 1
+          for: 30m
+          labels:
+            severity: warning
     - name: nodes-funding
       rules:
         - alert: NodeFundingwxHOPRLow
