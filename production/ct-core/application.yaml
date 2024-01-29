@@ -51,7 +51,7 @@ spec:
               DISTRIBUTION_MIN_ELIGIBLE_PEERS: 100
               DISTRIBUTION_MAX_APR_PERCENTAGE: 15.0
 
-              PEER_MIN_VERSION: "0.0.0"
+              PEER_MIN_VERSION: "2.0.7"
 
               GCP_FILE_PREFIX: expected_reward
               GCP_FOLDER: expected_rewards
@@ -59,7 +59,7 @@ spec:
 
               ECONOMIC_MODEL_FILENAME: parameters-production.json
 
-              ECONOMIC_MODEL_MIN_SAFE_ALLOWANCE: 0.000000001
+              ECONOMIC_MODEL_MIN_SAFE_ALLOWANCE: 0
 
               CHANNEL_MIN_BALANCE: 15
               CHANNEL_FUNDING_AMOUNT: 50
