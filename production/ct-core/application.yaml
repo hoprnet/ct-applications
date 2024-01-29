@@ -51,7 +51,7 @@ spec:
               DISTRIBUTION_MIN_ELIGIBLE_PEERS: 100
               DISTRIBUTION_MAX_APR_PERCENTAGE: 15.0
 
-              PEER_MIN_VERSION: "2.0.7"
+              PEER_MIN_VERSION: "0.0.0"
 
               GCP_FILE_PREFIX: expected_reward
               GCP_FOLDER: expected_rewards
