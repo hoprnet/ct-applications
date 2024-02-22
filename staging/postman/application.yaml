@@ -15,13 +15,13 @@ spec:
           name: postman
         image:
           repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
-          tag: "v2.1.5"
-        replicaCount: 0
+          tag: "3d2d35d"
+        replicaCount: 1
         args:
           - /bin/sh
           - -c
           - |
-            celery -A postman.postman_tasks.app worker -c 2 -n worker@%h -l info -E -Q "send_messages"
+            celery -A postman.postman_tasks.app worker -c 4 -n worker@%h -l info -E -Q "send_messages"
         env:
           PARAM_BATCH_SIZE: 100
           PARAM_DELAY_BETWEEN_TWO_MESSAGES: 0.3
