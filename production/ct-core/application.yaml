@@ -59,7 +59,7 @@ spec:
 
               ECONOMIC_MODEL_FILENAME: parameters-production.json
 
-              ECONOMIC_MODEL_MIN_SAFE_ALLOWANCE: 0.000000000001
+              ECONOMIC_MODEL_MIN_SAFE_ALLOWANCE: -1
 
               CHANNEL_MIN_BALANCE: 15
               CHANNEL_FUNDING_AMOUNT: 50
