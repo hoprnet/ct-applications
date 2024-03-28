@@ -63,7 +63,7 @@ spec:
 
               CHANNEL_MIN_BALANCE: 15
               CHANNEL_FUNDING_AMOUNT: 50
-              CHANNEL_MAX_AGE_SECONDS: 604800
+              CHANNEL_MAX_AGE_SECONDS: 172800
 
               RABBITMQ_TASK_NAME: send_1_hop_message
               RABBITMQ_PROJECT_NAME: ct-app
