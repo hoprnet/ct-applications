@@ -19,7 +19,7 @@ spec:
               repository: europe-west6-docker.pkg.dev/ctdapp-391309/ctdapp/cover-traffic
               tag: "v2.1.8"
               pullPolicy: Always
-            replicaCount: 0
+            replicaCount: 1
             containerSecurityContext:
               enabled: true
               runAsUser: 1001
@@ -35,7 +35,7 @@ spec:
               FLAG_CORE_GET_TOPOLOGY_DATA: 300
               FLAG_CORE_GET_SUBGRAPH_DATA: 200
               FLAG_CORE_APPLY_ECONOMIC_MODEL: 600
-              FLAG_CORE_DISTRIBUTE_REWARDS: 1
+              FLAG_CORE_DISTRIBUTE_REWARDS: 0
 
               FLAG_NODE_HEALTHCHECK: 60
               FLAG_NODE_RETRIEVE_PEERS: 300
