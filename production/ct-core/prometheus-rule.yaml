@@ -126,3 +126,14 @@ spec:
           for: 30m
           labels:
             severity: critical
+    - name: distribution
+      rules:
+        - alert: DistributionFailing
+          annotations:
+            description: >-
+              No distribution occured in the past 3h
+            summary: Distributions failed
+          expr: rabbitmq_queue_messages == 0
+          for: 3h
+          labels:
+            severity: critical
